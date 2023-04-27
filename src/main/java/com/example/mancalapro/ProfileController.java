@@ -56,7 +56,8 @@ public class ProfileController implements Initializable {
             username.setText(user.getUserName());
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
-            lastLogin.setText(user.getLastLogin().toString());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            lastLogin.setText(user.getLastLogin().format(formatter).toString());
 
             if (user instanceof Player) {
                 Player player = (Player) user;

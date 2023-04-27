@@ -51,4 +51,10 @@ public class Player extends User {
         this.favorite = favorite;
     }
 
+    public  double getWinRatio() {
+        if (getNumberOfGames() == 0){
+            return 0;
+        }
+        return getNumberOfWins() / getNumberOfGames();
+    }
 }

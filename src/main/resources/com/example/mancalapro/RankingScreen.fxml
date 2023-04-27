@@ -29,15 +29,15 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </ImageView>
-        <TableView layoutX="238.0" layoutY="97.0" prefHeight="515.0" prefWidth="845.0">
+        <TableView fx:id="leaderboardTable" layoutX="238.0" layoutY="97.0" prefHeight="515.0" prefWidth="845.0">
             <columns>
-                <TableColumn prefWidth="133.9847412109375" text="RANKING"/>
-                <TableColumn prefWidth="103.01100158691406" text="USERNAME"/>
-                <TableColumn prefWidth="134.48477172851562" text="TOTAL MATCHES"/>
-                <TableColumn prefWidth="138.87701416015625" text="TOTAL LOSSES"/>
-                <TableColumn prefWidth="119.0938720703125" text="TOTAL WINS"/>
-                <TableColumn prefWidth="114.2762451171875" text="WIN %"/>
-                <TableColumn prefWidth="99.2237548828125" text="FAVOURITE"/>
+                <TableColumn fx:id="rankingColumn" prefWidth="133.9847412109375" text="RANKING"/>
+                <TableColumn fx:id="usernameColumn" prefWidth="103.01100158691406" text="USERNAME"/>
+                <TableColumn fx:id="totalMatchesColumn" prefWidth="134.48477172851562" text="TOTAL MATCHES"/>
+                <TableColumn fx:id="totalLossesColumn" prefWidth="138.87701416015625" text="TOTAL LOSSES"/>
+                <TableColumn fx:id="totalWinsColumn" prefWidth="119.0938720703125" text="TOTAL WINS"/>
+                <TableColumn fx:id="winPercentageColumn" prefWidth="114.2762451171875" text="WIN %"/>
+                <TableColumn fx:id="favoriteColumn" prefWidth="99.2237548828125" text="FAVOURITE"/>
             </columns>
         </TableView>
     </children>
