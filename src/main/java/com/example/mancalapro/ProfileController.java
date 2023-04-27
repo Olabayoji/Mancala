@@ -31,11 +31,17 @@ public class ProfileController implements Initializable {
     private Parent root;
     private  Stage stage;
     private Scene scene;
+    @FXML
     private Text username;
+    @FXML
     private Text firstName;
+    @FXML
     private Text lastName;
+    @FXML
     private Text lastLogin;
+    @FXML
     private Text numberOfGames;
+    @FXML
     private Text numberOfWins;
 
 
@@ -44,21 +50,19 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ContextManager contextManager = ContextManager.getInstance();
-        boolean admin = contextManager.retrieveFromContext("admin") != null ;
-//        User user;
-//        System.out.println(contextManager./\);
-        if (admin) {
-           Admin user = (Admin) contextManager.retrieveFromContext("admin");
-        }else if(contextManager != null) {
-            System.out.println((Player) contextManager.retrieveFromContext("player"));
-//            Player user = (Player) contextManager.retrieveFromContext("player");
-////            username.setText(user.getUserName());
-//            firstName.setText(user.getFirstName());
-//            lastName.setText(user.getLastName());
-////            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-////            lastLogin.setText(user.getLastLogin().format(formatter));
-//            numberOfGames.setText(Integer.toString(user.getNumberOfGames()));
-//            numberOfWins.setText(Integer.toString(user.getNumberOfWins()));
+        User user = (User) contextManager.retrieveFromContext("currentUser");
+
+        if (user != null) {
+            username.setText(user.getUserName());
+            firstName.setText(user.getFirstName());
+            lastName.setText(user.getLastName());
+            lastLogin.setText(user.getLastLogin().toString());
+
+            if (user instanceof Player) {
+                Player player = (Player) user;
+                numberOfGames.setText(Integer.toString(player.getNumberOfGames()));
+                numberOfWins.setText(Integer.toString(player.getNumberOfWins()));
+            }
         }
 
 
