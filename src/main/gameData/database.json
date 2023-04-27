@@ -1,0 +1,50 @@
+[
+    {
+        "numberOfGames": 0,
+        "firstName": "player1",
+        "lastName": "Player1",
+        "lastLogin": "2023-04-27T13:32:58.434576",
+        "password": "12345",
+        "approved": false,
+        "dateCreated": "2023-04-27T12:22:13.778592",
+        "numberOfWins": 0,
+        "profileImage": "",
+        "userName": "player1",
+        "type": "player",
+        "favorite": []
+    },
+    {
+        "numberOfGames": 0,
+        "firstName": "testing",
+        "lastName": "atee",
+        "lastLogin": "2023-04-27T13:23:08.305395",
+        "password": "12345",
+        "approved": false,
+        "dateCreated": "2023-04-27T13:23:08.305307",
+        "numberOfWins": 0,
+        "profileImage": "",
+        "userName": "testing",
+        "type": "player",
+        "favorite": []
+    },
+    {
+        "firstName": "admin",
+        "lastName": "admin",
+        "lastLogin": "2023-04-27T12:40:16.606799",
+        "password": "test1",
+        "dateCreated": "2023-04-27T12:21:27.141531",
+        "profileImage": "",
+        "userName": "admin",
+        "type": "admin"
+    },
+    {
+        "firstName": "ad",
+        "lastName": "admin",
+        "lastLogin": "2023-04-27T13:24:34.512956",
+        "password": "admin",
+        "dateCreated": "2023-04-27T13:24:34.512928",
+        "profileImage": "",
+        "userName": "admin1",
+        "type": "admin"
+    }
+]

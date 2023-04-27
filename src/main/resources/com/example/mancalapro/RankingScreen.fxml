@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.mancalapro.RankingScreenController">
+    <children>
+        <Text layoutX="4.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD"
+              textAlignment="CENTER" wrappingWidth="1279.56298828125">
+            <font>
+                <Font name="Monospaced Bold" size="36.0"/>
+            </font>
+        </Text>
+        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@assets/back-arrow.png"/>
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+        <TableView layoutX="238.0" layoutY="97.0" prefHeight="515.0" prefWidth="845.0">
+            <columns>
+                <TableColumn prefWidth="133.9847412109375" text="RANKING"/>
+                <TableColumn prefWidth="103.01100158691406" text="USERNAME"/>
+                <TableColumn prefWidth="134.48477172851562" text="TOTAL MATCHES"/>
+                <TableColumn prefWidth="138.87701416015625" text="TOTAL LOSSES"/>
+                <TableColumn prefWidth="119.0938720703125" text="TOTAL WINS"/>
+                <TableColumn prefWidth="114.2762451171875" text="WIN %"/>
+                <TableColumn prefWidth="99.2237548828125" text="FAVOURITE"/>
+            </columns>
+        </TableView>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+</AnchorPane>

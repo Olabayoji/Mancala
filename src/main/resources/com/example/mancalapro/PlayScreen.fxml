@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.mancalapro.PlayScreenController">
+    <children>
+        <Text layoutX="11.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSIC MODE"
+              textAlignment="CENTER" wrappingWidth="1278.1353759765625">
+            <font>
+                <Font name="Monospaced Bold" size="36.0"/>
+            </font>
+        </Text>
+        <ImageView fx:id="btnMainMenu" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/back-arrow.png"/>
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+        <HBox fx:id="board" alignment="CENTER" layoutX="126.0" layoutY="202.0" spacing="24.0">
+            <children>
+                <Pane prefHeight="304.0" prefWidth="121.0" styleClass="section">
+                    <children>
+                        <Pane layoutX="10.0" layoutY="13.0" prefHeight="278.0" prefWidth="100.0" styleClass="pot"/>
+                    </children>
+                </Pane>
+                <VBox alignment="CENTER" spacing="32.0">
+                    <children>
+                        <HBox prefHeight="100.0" prefWidth="715.0" spacing="24.0" styleClass="midrow, topmid">
+                            <children>
+                                <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pot"/>
+                                <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="144.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="160.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="514.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="605.0" spacing="24.0" styleClass="midrow, botmid">
+                            <children>
+                                <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pot"/>
+                                <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="144.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="160.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                                <Pane layoutX="454.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0"
+                                      styleClass="pot"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Pane prefHeight="304.0" prefWidth="121.0" styleClass="section">
+                    <children>
+                        <Pane layoutX="10.0" layoutY="13.0" prefHeight="278.0" prefWidth="100.0" styleClass="pot"/>
+                    </children>
+                </Pane>
+            </children>
+        </HBox>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+</AnchorPane>

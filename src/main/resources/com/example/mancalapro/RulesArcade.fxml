@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.mancalapro.RulesArcadeController">
+    <children>
+        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@assets/back-arrow.png"/>
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+        <Text layoutX="586.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RULES">
+            <font>
+                <Font name="Monospaced Bold" size="36.0"/>
+            </font>
+        </Text>
+        <HBox alignment="CENTER" layoutX="82.0" layoutY="100.0" spacing="48.0">
+            <children>
+                <Text fx:id="btnClassic" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSIC">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Text>
+                <Group>
+                    <children>
+                        <ImageView fitHeight="57.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/oval.png"/>
+                            </image>
+                        </ImageView>
+                        <Text layoutX="36.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ARCADE">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </Group>
+            </children>
+        </HBox>
+        <VBox layoutX="82.0" layoutY="201.0" prefHeight="200.0" prefWidth="100.0" spacing="16.0">
+            <children>
+                <Text fx:id="btnArcade1" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• The Arcade mode follow the Classic Mode rules, but with some added features.">
+                    <font>
+                        <Font name="Monospaced Regular" size="13.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade11" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• Each player starts with two power-ups:">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade114" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="  ○  Continue Turn: Keep playing after landing in an empty hole.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade115" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="  ○  Double Points: Double the points added to your store for one turn.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade1181" fontSmoothingType="LCD" layoutX="10.0" layoutY="271.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0"
+                      text="•  During the game, players may encounter special stones (10% chance per turn):">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade11811" fontSmoothingType="LCD" layoutX="10.0" layoutY="299.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0"
+                      text="  ○   Half Hand: Pick up only half of the pieces in a hole, rounding up. The remaining pieces stay.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade118111" fontSmoothingType="LCD" layoutX="10.0" layoutY="319.0"
+                      strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="  ○   Reverse Turn: Move clockwise instead of counter-clockwise for one round.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade1181111" fontSmoothingType="LCD" layoutX="10.0" layoutY="213.0"
+                      strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="  ○   Switch Sides: Take stones from the opposite side and play from there.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade11811111" fontSmoothingType="LCD" layoutX="10.0" layoutY="245.0"
+                      strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• Power-ups and special stones are used at the start of a turn and must be announced by the player.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+            </children>
+        </VBox>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+</AnchorPane>

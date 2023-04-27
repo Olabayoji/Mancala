@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.RulesController">
+    <children>
+        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@assets/back-arrow.png"/>
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+        <Text layoutX="586.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RULES">
+            <font>
+                <Font name="Monospaced Bold" size="36.0"/>
+            </font>
+        </Text>
+        <HBox alignment="CENTER" layoutX="50.0" layoutY="101.0" spacing="48.0">
+            <children>
+                <Group>
+                    <children>
+                        <ImageView fitHeight="57.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/oval.png"/>
+                            </image>
+                        </ImageView>
+                        <Text layoutX="32.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSIC">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </Group>
+                <Text fx:id="btnArcade" strokeType="OUTSIDE" strokeWidth="0.0" text="ARCADE">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+        <VBox layoutX="78.0" layoutY="200.17724609375" spacing="16.0">
+            <children>
+                <Text fx:id="btnArcade1" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• Mancala is played on a board with two rows of six holes, and a larger hole (called a &quot;store&quot; or &quot;Mancala&quot;) at each end.">
+                    <font>
+                        <Font name="Monospaced Regular" size="13.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade11" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• The game starts with four pieces in each of the 12 smaller holes.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade111" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• Each player has a store on their right side of the board.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade112" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• A player is chosen randomly to start. They pick up all pieces from one of the holes on their side.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade113" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="• Players take turns, following these steps:">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade114" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="   ○  Move counter-clockwise, dropping one piece in each hole.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade115" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="   ○  If you reach your store, place one piece in it. Skip your opponent's store.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade116" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="   ○  If your last piece lands in your store, you get another turn.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade117" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="   ○  If your last piece lands in a hole with pieces, pick them up and continue.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade118" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="   ○  If your last piece lands in an empty hole, your turn ends, and it's your opponent's turn.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade1181" fontSmoothingType="LCD" layoutX="10.0" layoutY="271.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="•  The game ends when one player's side is empty.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade11811" fontSmoothingType="LCD" layoutX="10.0" layoutY="299.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="•  The player with pieces remaining captures all of them.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="btnArcade118111" fontSmoothingType="LCD" layoutX="10.0" layoutY="319.0"
+                      strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="•  The player with the most pieces in their store wins.">
+                    <font>
+                        <Font name="Monospaced Regular" size="14.0"/>
+                    </font>
+                </Text>
+            </children>
+        </VBox>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+</AnchorPane>
