@@ -39,7 +39,7 @@ public class PlayScreenController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Mancala Game");
                 alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to end the game?");
+                alert.setContentText("Are you sure you want to end the game?\nThis will automatically count as a loss");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
