@@ -183,5 +183,20 @@ public class Database {
         }
     }
 
+    public void addFavoritePlayer(Player currentUser, Player favoritePlayer) {
+        Player userInDatabase = (Player) getUser(currentUser.getUserName());
+        if (userInDatabase != null) {
+            userInDatabase.addFavorite(favoritePlayer);
+        }
+    }
+
+    public void removeFavoritePlayer(Player currentUser, Player favoritePlayer) {
+        Player userInDatabase = (Player) getUser(currentUser.getUserName());
+        if (userInDatabase != null) {
+            userInDatabase.removeFavorite(favoritePlayer);
+        }
+    }
+
+
 
 }

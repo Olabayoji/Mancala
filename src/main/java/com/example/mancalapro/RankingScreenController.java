@@ -1,10 +1,6 @@
 package com.example.mancalapro;
 
 import com.example.mancalapro.model.*;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -67,7 +63,6 @@ public class RankingScreenController implements Initializable {
         });
     }
 
-
     private void initTableColumns() {
         rankingColumn.setCellValueFactory(new PropertyValueFactory<>("ranking"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -78,40 +73,71 @@ public class RankingScreenController implements Initializable {
         favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("favorite"));
     }
 
+
     private void loadLeaderboardData() {
+
         Database database = DatabaseManager.getDatabaseInstance();
         List<Player> players = database.getPlayers();
         players.sort(Comparator.comparingDouble(Player::getWinRatio).reversed());
 
         ObservableList<LeaderBoardRow> playerRows = FXCollections.observableArrayList();
+
         int ranking = 1;
         for (Player player : players) {
             double winPercentage = player.getWinRatio() * 100;
             ContextManager contextManager = ContextManager.getInstance();
             Player currentUser = (Player) contextManager.retrieveFromContext("currentUser");
             boolean favorite = currentUser.getFavorite().contains(player);
+
             LeaderBoardRow playerRow = new LeaderBoardRow(ranking, player.getUserName(), player.getNumberOfGames(),
-                    player.getNumberOfGames() - player.getNumberOfWins(), player.getNumberOfWins(), winPercentage, favorite);
+                    player.getNumberOfGames() - player.getNumberOfWins(), player.getNumberOfWins(), winPercentage,
+                    favorite);
             playerRows.add(playerRow);
             ranking++;
         }
-//
-//        leaderboardTable.setItems(playerRows);
-//
-//        // Add event handler for row selection
-//        leaderboardTable.setRowFactory(tv -> {
-//            ContextManager contextManager = ContextManager.getInstance();
-//            Player currentUser = (Player) contextManager.retrieveFromContext("currentUser");
-//            TableRow<LeaderBoardRow> row = new TableRow<>();
-//            row.setOnMouseClicked(event -> {
-//                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
-//                    LeaderBoardRow rowData = row.getItem();
-//                    // Add rowData to the current user's favorite list
-//                    currentUser.setFavorite((Player) rowData);
-//                }
-//            });
-//            return row;
-//        });
+
+        leaderboardTable.setItems(playerRows);
+
+        // Add event handler for row selection
+        leaderboardTable.setRowFactory(tv -> {
+            ContextManager contextManager = ContextManager.getInstance();
+            Player currentUser = (Player) contextManager.retrieveFromContext("currentUser");
+
+            TableRow<LeaderBoardRow> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                    LeaderBoardRow rowData = row.getItem();
+                    // Find the corresponding Player object based on the rowData's username
+                    Player selectedPlayer = players.stream()
+                            .filter(player -> player.getUserName().equals(rowData.getUsername())).findFirst()
+                            .orElse(null);
+
+                    // player cant add themselves as favorite
+                    if (selectedPlayer.getUserName().equals(currentUser.getFirstName())) {
+                        selectedPlayer = null;
+                    }
+
+                    if (selectedPlayer != null) {
+                        // Check if selectedPlayer is already in the currentUser's favorite list
+                        boolean isFavorite = currentUser.getFavorite().contains(selectedPlayer);
+
+                        if (isFavorite) {
+                            // Remove selectedPlayer from the currentUser's favorite list
+                            currentUser.removeFavorite(selectedPlayer);
+                            database.removeFavoritePlayer(currentUser, selectedPlayer);
+                        } else {
+                            // Add selectedPlayer to the currentUser's favorite list
+                            currentUser.addFavorite(selectedPlayer);
+                            database.addFavoritePlayer(currentUser, selectedPlayer);
+                        }
+
+                        // Update the rowData's favorite status and refresh the table
+                        rowData.setFavorite(!isFavorite);
+                        leaderboardTable.refresh();
+                    }
+                }
+            });
+            return row;
+        });
     }
 }
-

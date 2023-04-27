@@ -30,6 +30,7 @@ public class RulesArcadeController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnBack.setOnMouseClicked(mouseEvent -> {

@@ -3,6 +3,7 @@ package com.example.mancalapro.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Player extends User {
     private int numberOfGames;
@@ -47,8 +48,8 @@ public class Player extends User {
         return favorite;
     }
 
-    public void setFavorite(List<Player> favorite) {
-        this.favorite = favorite;
+    public void addFavorite(Player favorite) {
+        this.favorite.add(favorite);
     }
 
     public  double getWinRatio() {
@@ -56,5 +57,26 @@ public class Player extends User {
             return 0;
         }
         return getNumberOfWins() / getNumberOfGames();
+    }
+
+    public void removeFavorite(Player selectedPlayer) {
+        favorite.remove(selectedPlayer);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Player player = (Player) o;
+        return Objects.equals(userName, player.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName);
     }
 }

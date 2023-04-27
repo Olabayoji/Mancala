@@ -70,7 +70,7 @@ public class StartScreenController implements Initializable {
                     System.out.println(user instanceof Player);
 
                     user.updateLastLogin();
-                    DatabaseManager.saveDatabaseInstance();
+//                    DatabaseManager.saveDatabaseInstance();
                     try {
                         ContextManager contextManager = ContextManager.getInstance();
                         contextManager.addToContext(user instanceof Player ? "currentUser" : "currentUser", user);
