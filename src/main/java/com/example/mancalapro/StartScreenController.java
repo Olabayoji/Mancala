@@ -67,7 +67,7 @@ public class StartScreenController implements Initializable {
                 if (user != null && user.getPassword().equals(password) && user.isApproved()) {
                     txErrorMsg.setFill(Color.FORESTGREEN);
                     txErrorMsg.setText("Login successful.");
-                    System.out.println(user instanceof Player);
+//                    System.out.println(user instanceof Player);
 
                     user.updateLastLogin();
 //                    DatabaseManager.saveDatabaseInstance();
@@ -75,8 +75,12 @@ public class StartScreenController implements Initializable {
                         ContextManager contextManager = ContextManager.getInstance();
                         // Store the current user's username in ContextManager
                         ContextManager.getInstance().addToContext("currentUser", user.getUserName());
-
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                        FXMLLoader loader;
+                         if (user instanceof Player){
+                             loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                         }else{
+                             loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
+                         }
                         root = loader.load();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);

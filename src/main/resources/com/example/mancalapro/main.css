@@ -62,3 +62,26 @@
   -fx-background-color: #E5E4E2;
 
 }
+
+.list-cell {
+    -fx-background-color: white;
+    -fx-border-color: lightgray;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 5px;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: lightblue;
+}
+
+.list-cell .hbox {
+    -fx-alignment: center-left;
+}
+
+.list-cell .hbox .text {
+    -fx-fill: black;
+    -fx-font-family: "System";
+    -fx-font-size: 12px;
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+}

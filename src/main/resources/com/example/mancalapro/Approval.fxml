@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ApprovalController">
+    <children>
+        <HBox alignment="CENTER" layoutX="337.0" layoutY="131.0" prefHeight="17.0" prefWidth="594.0" spacing="10.0">
+            <Label prefHeight="16.0" prefWidth="120.0" text="Username">
+                <font>
+                    <Font name="Monospaced Bold" size="13.0" />
+                </font></Label>
+            <Label prefWidth="150.0" text="First Name">
+                <font>
+                    <Font name="Monospaced Bold" size="13.0" />
+                </font></Label>
+            <Label prefWidth="150.0" text="Last Name">
+                <font>
+                    <Font name="Monospaced Bold" size="13.0" />
+                </font></Label>
+            <Label prefHeight="16.0" prefWidth="75.0" text="Approval">
+                <font>
+                    <Font name="Monospaced Bold" size="13.0" />
+                </font></Label>
+        </HBox>
+        <ListView fx:id="unapprovedPlayersListView" layoutX="334.0" layoutY="148.0" prefHeight="400" prefWidth="600" />
+        <Text layoutX="4.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="APPROVALS" textAlignment="CENTER" wrappingWidth="1279.56298828125">
+            <font>
+                <Font name="Monospaced Bold" size="36.0" />
+            </font>
+        </Text>
+        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/back-arrow.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Text fx:id="label" layoutX="554.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No player to approval">
+            <font>
+                <Font name="Monospaced Bold" size="13.0" />
+            </font>
+        </Text>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
+</AnchorPane>

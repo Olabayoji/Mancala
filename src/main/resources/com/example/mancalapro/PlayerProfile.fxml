@@ -24,11 +24,14 @@
         <VBox alignment="CENTER" layoutX="562.0" layoutY="96.0" spacing="8.0">
             <children>
                 <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
-                    <image >
-                        <Image  url="@assets/profile-icon.png" />
+                    <image>
+                        <Image url="@assets/profile-icon.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="btnChangeImage" mnemonicParsing="false" text="Change Image" />
+            <Button fx:id="btnChangeImage" mnemonicParsing="false" text="Change Image">
+               <font>
+                  <Font name="Monospaced Regular" size="13.0" />
+               </font></Button>
                 <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
                <font>
                   <Font name="Monospaced Bold" size="13.0" />
