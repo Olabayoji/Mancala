@@ -90,6 +90,12 @@ public class Database {
         }
         return false;
     }
+    public List<User> getAllUsers() {
+        List<User> allUsers = new ArrayList<>();
+        allUsers.addAll(players);
+        allUsers.addAll(admins);
+        return allUsers;
+    }
 
     public List<Player> getPlayers() {
         return players;

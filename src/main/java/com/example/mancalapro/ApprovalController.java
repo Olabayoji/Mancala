@@ -2,6 +2,7 @@ package com.example.mancalapro;
 
 import com.example.mancalapro.model.Database;
 import com.example.mancalapro.model.Player;
+import com.example.mancalapro.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,17 +51,17 @@ public class ApprovalController implements Initializable {
             }
         });
 
-        // Get unapproved players
-        List<Player> unapprovedPlayers = Database.getInstance().getPlayers().stream()
+        // Get unapproved users
+        List<User> unapprovedUsers = Database.getInstance().getAllUsers().stream()
                 .filter(player -> !player.isApproved())
                 .collect(Collectors.toList());
 
         // If no unapproved players found, display the label
-        if (unapprovedPlayers.isEmpty()) {
+        if (unapprovedUsers.isEmpty()) {
             label.setVisible(true);
         } else {
             label.setVisible(false);
-            for (Player player : unapprovedPlayers) {
+            for (User player : unapprovedUsers) {
                 HBox hbox = new HBox(50);
                 Label usernameLabel = new Label(player.getUserName());
                 usernameLabel.setMaxWidth(100); // Set the maximum width of the label
@@ -77,18 +78,23 @@ public class ApprovalController implements Initializable {
                 lastNameLabel.setPrefWidth(100); // Set the preferred width of the label
                 lastNameLabel.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
 
+                Label access = new Label(player instanceof  Player ? "Player" : "Admin");
+                lastNameLabel.setMaxWidth(100); // Set the maximum width of the label
+                lastNameLabel.setPrefWidth(100); // Set the preferred width of the label
+                lastNameLabel.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
+
                 Button approveButton = createApproveButton(player);
                 approveButton.setMaxWidth(100); // Set the maximum width of the label
                 approveButton.setPrefWidth(100); // Set the preferred width of the label
                 approveButton.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
-                hbox.getChildren().addAll(usernameLabel, firstNameLabel, lastNameLabel, approveButton);
+                hbox.getChildren().addAll(usernameLabel, firstNameLabel, lastNameLabel,access, approveButton);
                 unapprovedPlayersListView.getItems().add(hbox);
             }
         }
     }
 
 
-    private Button createApproveButton(Player player) {
+    private Button createApproveButton(User player) {
         Button approveButton = new Button("Approve");
         approveButton.setOnAction(event -> {
             player.setApproved(true); // Update the approval status in the Player object
