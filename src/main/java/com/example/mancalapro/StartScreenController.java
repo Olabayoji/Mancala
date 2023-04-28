@@ -64,7 +64,7 @@ public class StartScreenController implements Initializable {
                 Database database = Database.getInstance();
                 User user = database.getUser(username);
 
-                if (user != null && user.getPassword().equals(password)) {
+                if (user != null && user.getPassword().equals(password) && user.isApproved()) {
                     txErrorMsg.setFill(Color.FORESTGREEN);
                     txErrorMsg.setText("Login successful.");
                     System.out.println(user instanceof Player);
@@ -85,6 +85,10 @@ public class StartScreenController implements Initializable {
                     } catch (/* InterruptedException | */IOException e) {
                         throw new RuntimeException(e);
                     }
+                } else if (user != null && user.getPassword().equals(password) && !user.isApproved()) {
+                    txErrorMsg.setFill(Color.FIREBRICK);
+                    txErrorMsg.setText(
+                            "Contact admin.\nYou need to be approved");
                 } else {
                     txErrorMsg.setFill(Color.FIREBRICK);
                     txErrorMsg.setText(

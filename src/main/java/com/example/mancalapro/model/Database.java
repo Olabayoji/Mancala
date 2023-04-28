@@ -125,7 +125,7 @@ public class Database {
                             userJsonObj.getString("password"));
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
-                    ((Player) user).setApproved(userJsonObj.getBoolean("approved"));
+                    user.setApproved(userJsonObj.getBoolean("approved"));
 
                 } else if ("admin".equals(type)) {
                     user = new Admin(
@@ -134,6 +134,8 @@ public class Database {
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
                             userJsonObj.getString("password"));
+                            user.setApproved(userJsonObj.getBoolean("approved"));
+
                 } else {
                     continue;
                 }
@@ -188,13 +190,13 @@ public class Database {
             userJsonObj.put("lastLogin", user.getLastLogin().toString());
             userJsonObj.put("profileImage", user.getProfileImage());
             userJsonObj.put("password", user.getPassword());
+            userJsonObj.put("approved", user.isApproved());
 
             if (user instanceof Player) {
                 Player player = (Player) user;
                 userJsonObj.put("type", "player");
                 userJsonObj.put("numberOfGames", player.getNumberOfGames());
                 userJsonObj.put("numberOfWins", player.getNumberOfWins());
-                userJsonObj.put("approved", player.isApproved());
                 userJsonObj.put("favorite", player.getFavorite());
 
                 // Save favorite players

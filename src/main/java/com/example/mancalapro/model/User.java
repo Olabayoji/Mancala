@@ -12,6 +12,7 @@ public class User {
     protected String profileImage;
 
     protected String password;
+    protected boolean approved;
 
     public User(String firstName, String lastName, String userName, String profileImage, String password) {
         this.firstName = firstName;
@@ -21,6 +22,7 @@ public class User {
         this.lastLogin = LocalDateTime.now();
         this.profileImage = profileImage;
         this.password = password;
+        this.approved = false;
     }
 
     public String getPassword() {
@@ -82,5 +84,11 @@ public class User {
         this.profileImage = profileImage;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
 
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }

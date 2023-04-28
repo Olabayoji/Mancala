@@ -91,7 +91,9 @@ public class RankingScreenController implements Initializable {
             LeaderBoardRow playerRow = new LeaderBoardRow(ranking, player.getUserName(), player.getNumberOfGames(),
                     player.getNumberOfGames() - player.getNumberOfWins(), player.getNumberOfWins(), winPercentage,
                     favorite);
-            playerRows.add(playerRow);
+           if (player.isApproved()){
+               playerRows.add(playerRow);
+           }
             ranking++;
         }
 

@@ -8,14 +8,12 @@ import java.util.Objects;
 public class Player extends User {
     private int numberOfGames;
     private int numberOfWins;
-    private boolean approved;
     private List<Player> favorite;
 
     public Player(String firstName, String lastName, String userName, String profileImage, String password) {
         super(firstName, lastName, userName, profileImage, password);
         this.numberOfGames = 0;
         this.numberOfWins = 0;
-        this.approved = false;
         this.favorite = new ArrayList<>();
     }
 
