@@ -73,7 +73,9 @@ public class StartScreenController implements Initializable {
 //                    DatabaseManager.saveDatabaseInstance();
                     try {
                         ContextManager contextManager = ContextManager.getInstance();
-                        contextManager.addToContext(user instanceof Player ? "currentUser" : "currentUser", user);
+                        // Store the current user's username in ContextManager
+                        ContextManager.getInstance().addToContext("currentUser", user.getUserName());
+
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
                         root = loader.load();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -65,7 +65,7 @@
                      <font>
                         <Font name="Monospaced Bold" size="13.0" />
                      </font></Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="01">
+                        <Text fx:id="ranking" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                      <font>
                         <Font name="Monospaced Regular" size="13.0" />
                      </font></Text>
@@ -101,7 +101,7 @@
                      <font>
                         <Font name="Monospaced Bold" size="13.0" />
                      </font></Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="01">
+                        <Text fx:id="winRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                      <font>
                         <Font name="Monospaced Regular" size="13.0" />
                      </font></Text>

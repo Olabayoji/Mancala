@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Database {
@@ -17,6 +18,8 @@ public class Database {
     private List<Admin> admins;
 
     private static Database instance;
+    private static final String DATABASE_FILE = "./src/main/gameData/database.json";
+
 
     private Database() {
         this.players = new ArrayList<>();
@@ -97,11 +100,18 @@ public class Database {
         return admins;
     }
 
+    public List<Player> getPlayersSortedByWinRatio() {
+        List<Player> sortedPlayers = new ArrayList<>(players);
+        sortedPlayers.sort(Comparator.comparingDouble(Player::getWinRatio).reversed());
+        return sortedPlayers;
+    }
+
     public void loadUsersFromJsonFile(String filePath) {
         try {
             String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
             JSONArray usersJsonArray = new JSONArray(fileContent);
 
+            // First, create and add all the users without favorite players
             for (int i = 0; i < usersJsonArray.length(); i++) {
                 JSONObject userJsonObj = usersJsonArray.getJSONObject(i);
                 String type = userJsonObj.getString("type");
@@ -118,6 +128,7 @@ public class Database {
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
                     ((Player) user).setApproved(userJsonObj.getBoolean("approved"));
+
                 } else if ("admin".equals(type)) {
                     user = new Admin(
                             userJsonObj.getString("firstName"),
@@ -130,7 +141,6 @@ public class Database {
                     continue;
                 }
 
-
                 user.setFirstName(userJsonObj.getString("firstName"));
                 user.setLastName(userJsonObj.getString("lastName"));
                 user.setUserName(userJsonObj.getString("userName"));
@@ -140,10 +150,31 @@ public class Database {
 
                 addUser(user);
             }
+
+            // Then, set favorite players for each user
+            for (int i = 0; i < usersJsonArray.length(); i++) {
+                JSONObject userJsonObj = usersJsonArray.getJSONObject(i);
+                String type = userJsonObj.getString("type");
+
+                if ("player".equals(type)) {
+                    Player user = (Player) getUser(userJsonObj.getString("userName"));
+
+                    // Load favorite players
+                    JSONArray favoriteJsonArray = userJsonObj.getJSONArray("favorite");
+                    for (int j = 0; j < favoriteJsonArray.length(); j++) {
+                        String favoritePlayerUsername = favoriteJsonArray.getString(j);
+                        Player favoritePlayer = (Player) getUser(favoritePlayerUsername);
+                        if (favoritePlayer != null) {
+                            user.addFavorite(favoritePlayer);
+                        }
+                    }
+                }
+            }
         } catch (IOException e) {
             System.err.println("Error reading users from JSON file: " + e.getMessage());
         }
     }
+
 
     public void saveUsersToJsonFile(String filePath) {
         JSONArray usersJsonArray = new JSONArray();
@@ -169,6 +200,14 @@ public class Database {
                 userJsonObj.put("numberOfWins", player.getNumberOfWins());
                 userJsonObj.put("approved", player.isApproved());
                 userJsonObj.put("favorite", player.getFavorite());
+
+                // Save favorite players
+                JSONArray favoriteJsonArray = new JSONArray();
+                for (Player favoritePlayer : player.getFavorite()) {
+                    favoriteJsonArray.put(favoritePlayer.getUserName());
+                }
+                userJsonObj.put("favorite", favoriteJsonArray);
+
             } else if (user instanceof Admin) {
                 userJsonObj.put("type", "admin");
             }
@@ -187,6 +226,7 @@ public class Database {
         Player userInDatabase = (Player) getUser(currentUser.getUserName());
         if (userInDatabase != null) {
             userInDatabase.addFavorite(favoritePlayer);
+            saveUsersToJsonFile(DATABASE_FILE);
         }
     }
 
@@ -194,9 +234,9 @@ public class Database {
         Player userInDatabase = (Player) getUser(currentUser.getUserName());
         if (userInDatabase != null) {
             userInDatabase.removeFavorite(favoritePlayer);
+            saveUsersToJsonFile(DATABASE_FILE);
         }
     }
-
 
 
 }
