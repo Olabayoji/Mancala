@@ -86,7 +86,7 @@ public class ProfileController implements Initializable {
             lastLogin.setText(user.getLastLogin().format(formatter).toString());
 
             //check if user has a set a profile image
-            if (user.getProfileImage() != null) {
+            if (user.getProfileImage() != null && !user.getProfileImage().isEmpty()) {
                 profileImage.setImage(new Image(user.getProfileImage()));
             }
 
@@ -110,6 +110,7 @@ public class ProfileController implements Initializable {
                 numberOfGames.setText("--");
                 numberOfWins.setText("--");
                 winRatio.setText("--");
+                ranking.setText("--");
             }
         }
 

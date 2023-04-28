@@ -25,13 +25,16 @@
         "profileImage": "file:/Users/admin/Downloads/untitled%201.JPG",
         "userName": "player1",
         "type": "player",
-        "favorite": ["testing"]
+        "favorite": [
+            "testing",
+            "testing"
+        ]
     },
     {
         "firstName": "admin",
         "lastName": "admin",
-        "lastLogin": "2023-04-27T12:40:16.606799",
-        "password": "test1",
+        "lastLogin": "2023-04-28T12:51:54.607565",
+        "password": "admin",
         "dateCreated": "2023-04-27T12:21:27.141531",
         "profileImage": "",
         "userName": "admin",
