@@ -1,9 +1,6 @@
 package com.example.mancalapro;
 
-import com.example.mancalapro.model.ContextManager;
-import com.example.mancalapro.model.DatabaseManager;
-import com.example.mancalapro.model.Player;
-import com.example.mancalapro.model.User;
+import com.example.mancalapro.model.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +46,10 @@ public class ProfileController implements Initializable {
     private Text winRatio;
     @FXML
     private Text ranking;
+    @FXML
+    private Button btnChangeImage;
+    @FXML
+    private ImageView profileImage;
 
     private int getPlayerRanking(Player player, List<Player> sortedPlayers) {
         for (int i = 0; i < sortedPlayers.size(); i++) {
@@ -54,6 +59,16 @@ public class ProfileController implements Initializable {
         }
         return -1;
     }
+    public void updateProfileImage(User user, String newImageUrl) {
+        // Assuming your database instance is called "database"
+        User userToUpdate = Database.getInstance().getUser(user.getUserName());
+
+        if (userToUpdate != null) {
+            userToUpdate.setProfileImage(newImageUrl);
+            // Add code to save the changes in the database if necessary
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Retrieve the current user's username from ContextManager
@@ -69,6 +84,11 @@ public class ProfileController implements Initializable {
             lastName.setText(user.getLastName());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             lastLogin.setText(user.getLastLogin().format(formatter).toString());
+
+            //check if user has a set a profile image
+            if (user.getProfileImage() != null) {
+                profileImage.setImage(new Image(user.getProfileImage()));
+            }
 
             if (user instanceof Player) {
                 Player player = (Player) user;
@@ -107,5 +127,28 @@ public class ProfileController implements Initializable {
             }
 
         });
+
+
+
+        btnChangeImage.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose a Profile Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null) {
+                // Update the user's profile image in the User object
+                String url = selectedFile.toURI().toString();
+                user.setProfileImage(url);
+
+                // Update the displayed image in the ImageView
+                profileImage.setImage(new Image(url));
+
+                // Save the changes to the database
+                DatabaseManager.getDatabaseInstance().updateProfileImage(user, url);
+            }
+        });
+
     }
 }

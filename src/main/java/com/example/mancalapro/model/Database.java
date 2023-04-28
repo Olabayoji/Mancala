@@ -20,7 +20,6 @@ public class Database {
     private static Database instance;
     private static final String DATABASE_FILE = "./src/main/gameData/database.json";
 
-
     private Database() {
         this.players = new ArrayList<>();
         this.admins = new ArrayList<>();
@@ -123,8 +122,7 @@ public class Database {
                             userJsonObj.getString("lastName"),
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
-                            userJsonObj.getString("password")
-                    );
+                            userJsonObj.getString("password"));
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
                     ((Player) user).setApproved(userJsonObj.getBoolean("approved"));
@@ -135,8 +133,7 @@ public class Database {
                             userJsonObj.getString("lastName"),
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
-                            userJsonObj.getString("password")
-                    );
+                            userJsonObj.getString("password"));
                 } else {
                     continue;
                 }
@@ -174,7 +171,6 @@ public class Database {
             System.err.println("Error reading users from JSON file: " + e.getMessage());
         }
     }
-
 
     public void saveUsersToJsonFile(String filePath) {
         JSONArray usersJsonArray = new JSONArray();
@@ -238,5 +234,13 @@ public class Database {
         }
     }
 
+    public void updateProfileImage(User user, String newImageUrl) {
+        User userToUpdate = Database.getInstance().getUser(user.getUserName());
+
+        if (userToUpdate != null) {
+            userToUpdate.setProfileImage(newImageUrl);
+
+        }
+    }
 
 }

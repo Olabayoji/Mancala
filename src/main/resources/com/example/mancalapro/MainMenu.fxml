@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.mancalapro.MainMenuController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.MainMenuController">
    <children>
       <Group layoutX="541.0" layoutY="3.0">
          <children>
@@ -77,7 +70,7 @@
       </HBox>
       <HBox layoutX="57.0" layoutY="620.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="161.0" spacing="24.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
+            <VBox fx:id="btnExit" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
                <children>
                   <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -112,11 +105,24 @@
          </children>
       </HBox>
       <VBox alignment="CENTER" layoutX="334.0" layoutY="197.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-      <ImageView fx:id="btnStartGame" fitHeight="181.0" fitWidth="161.0" layoutX="581.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/play.png" />
-         </image>
-      </ImageView>
+      <VBox alignment="CENTER" layoutX="547.0" layoutY="277.0" spacing="14.0">
+         <children>
+            <Pane fx:id="bgPlay" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="btnStartGame" fitHeight="181.0" fitWidth="161.0" layoutX="47.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/play.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label text="START GAME">
+               <font>
+                  <Font name="Monospaced Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

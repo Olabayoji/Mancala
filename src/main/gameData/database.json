@@ -17,15 +17,15 @@
         "numberOfGames": 0,
         "firstName": "player1",
         "lastName": "Player1",
-        "lastLogin": "2023-04-28T09:44:45.863338",
+        "lastLogin": "2023-04-28T12:47:33.484391",
         "password": "12345",
         "approved": false,
         "dateCreated": "2023-04-27T12:22:13.778592",
         "numberOfWins": 0,
-        "profileImage": "",
+        "profileImage": "file:/Users/admin/Downloads/untitled%201.JPG",
         "userName": "player1",
         "type": "player",
-        "favorite": []
+        "favorite": ["testing"]
     },
     {
         "firstName": "admin",

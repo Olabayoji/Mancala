@@ -21,23 +21,23 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-        setUpOnCloseHandling(primaryStage);
+    //        setUpOnCloseHandling(primaryStage);
     }
 
-    private void setUpOnCloseHandling(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(windowEvent -> {
-            // Save the changes to the database before closing the application
-            DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
-        });
-    }
+//    private void setUpOnCloseHandling(Stage primaryStage) {
+//        primaryStage.setOnCloseRequest(windowEvent -> {
+//            // Save the changes to the database before closing the application
+//            DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
+//        });
+//    }
 
     public static void main(String[] args) {
         Application.launch(args);
     }
-//
-//    @Override
-//    public void stop() throws Exception {
-//        super.stop();
-//        DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
-//    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
+    }
 }
