@@ -45,7 +45,7 @@ public class ModeSelectionController implements Initializable {
 
             try {
                 // Thread.sleep(2000);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ArcadeScreen.fxml"));
                 root = loader.load();
                 stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -59,7 +59,7 @@ public class ModeSelectionController implements Initializable {
         btnClassic.setOnMouseClicked(mouseEvent -> {
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
                 root = loader.load();
                 stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                 scene = new Scene(root);
