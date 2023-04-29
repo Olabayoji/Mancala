@@ -27,6 +27,10 @@
   -fx-margin: 5px;
 }
 
+#board .label{
+  -fx-text-fill: #FFF;
+}
+
 .endsection {
   -fx-display: flex;
   -fx-flex-grow: 1;
