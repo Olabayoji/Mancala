@@ -128,11 +128,11 @@ public class Database {
                             userJsonObj.getString("lastName"),
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
-                            userJsonObj.getString("password"));
+                            userJsonObj.getString("password"),
+                            userJsonObj.getBoolean("publicProfile"));
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
                     user.setApproved(userJsonObj.getBoolean("approved"));
-
                 } else if ("admin".equals(type)) {
                     user = new Admin(
                             userJsonObj.getString("firstName"),
@@ -204,6 +204,7 @@ public class Database {
                 userJsonObj.put("numberOfGames", player.getNumberOfGames());
                 userJsonObj.put("numberOfWins", player.getNumberOfWins());
                 userJsonObj.put("favorite", player.getFavorite());
+                userJsonObj.put("publicProfile", player.isPublicProfile());
 
                 // Save favorite players
                 JSONArray favoriteJsonArray = new JSONArray();
@@ -250,5 +251,6 @@ public class Database {
 
         }
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.mancalapro;
 
+import com.example.mancalapro.model.DatabaseManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,6 +40,8 @@ public class MainMenuController implements Initializable {
     private Stage stage;
     private Scene scene;
     private String username;
+    final String DATABASEPATH = "./src/main/gameData/database.json";
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -118,6 +121,8 @@ public class MainMenuController implements Initializable {
                 alert.setContentText("Are you sure you want to logout?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
+                    DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(DATABASEPATH);
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScreen.fxml"));
                     root = loader.load();
                     stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();

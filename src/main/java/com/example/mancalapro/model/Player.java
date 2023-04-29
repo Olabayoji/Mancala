@@ -8,13 +8,15 @@ import java.util.Objects;
 public class Player extends User {
     private int numberOfGames;
     private int numberOfWins;
+    private boolean publicProfile;
     private List<Player> favorite;
 
-    public Player(String firstName, String lastName, String userName, String profileImage, String password) {
+    public Player(String firstName, String lastName, String userName, String profileImage, String password, boolean publicProfile) {
         super(firstName, lastName, userName, profileImage, password);
         this.numberOfGames = 0;
         this.numberOfWins = 0;
         this.favorite = new ArrayList<>();
+        this.publicProfile = publicProfile;
     }
 
 
@@ -42,6 +44,20 @@ public class Player extends User {
         this.approved = approved;
     }
 
+    public boolean isPublicProfile() {
+        return publicProfile;
+    }
+
+    public void setPublicProfile() {
+        this.publicProfile = !this.publicProfile;
+
+        Player userToUpdate = (Player) Database.getInstance().getUser(this.userName);
+
+        if (userToUpdate != null) {
+            userToUpdate.isPublicProfile();
+        }
+    }
+
     public List<Player> getFavorite() {
         return favorite;
     }
@@ -50,8 +66,8 @@ public class Player extends User {
         this.favorite.add(favorite);
     }
 
-    public  double getWinRatio() {
-        if (getNumberOfGames() == 0){
+    public double getWinRatio() {
+        if (getNumberOfGames() == 0) {
             return 0;
         }
         return getNumberOfWins() / getNumberOfGames();

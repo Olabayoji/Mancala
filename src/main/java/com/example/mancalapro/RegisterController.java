@@ -103,7 +103,7 @@ public class RegisterController implements Initializable {
                 }
 
                 if (auth.getValue().equals("Player")) {
-                    Player player = new Player(firstname, lastname, username, "", password);
+                    Player player = new Player(firstname, lastname, username, "", password, true);
                     Database database = DatabaseManager.getDatabaseInstance();
                     if (!database.addUser(player)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -74,7 +75,6 @@ public class RankingScreenController implements Initializable {
         favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("favorite"));
     }
 
-
     private void loadLeaderboardData() {
         Database database = DatabaseManager.getDatabaseInstance();
         List<Player> players = database.getPlayersSortedByWinRatio();
@@ -91,10 +91,11 @@ public class RankingScreenController implements Initializable {
             LeaderBoardRow playerRow = new LeaderBoardRow(ranking, player.getUserName(), player.getNumberOfGames(),
                     player.getNumberOfGames() - player.getNumberOfWins(), player.getNumberOfWins(), winPercentage,
                     favorite);
-           if (player.isApproved()){
-               playerRows.add(playerRow);
-           }
-            ranking++;
+            if (player.isApproved()) {
+                playerRows.add(playerRow);
+                ranking++;
+            }
+
         }
 
         leaderboardTable.setItems(playerRows);
@@ -103,42 +104,63 @@ public class RankingScreenController implements Initializable {
         leaderboardTable.setRowFactory(tv -> {
             String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
             Player currentUser = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-            TableRow<LeaderBoardRow> row = new TableRow<>();
+            TableRow<LeaderBoardRow> row = new TableRow<>() {
+                @Override
+                protected void updateItem(LeaderBoardRow item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setStyle("");
+                    } else if (item.getUsername().equals(currentUser.getUserName())) {
+                        setStyle("-fx-background-color: #BE8A60; -fx-text-background-color: #fff");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            };
+
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                     LeaderBoardRow rowData = row.getItem();
                     Player selectedPlayer = players.stream()
                             .filter(player -> player.getUserName().equals(rowData.getUsername())).findFirst()
                             .orElse(null);
-
-                    if (selectedPlayer != null && !selectedPlayer.getUserName().equals(currentUser.getUserName())) {
-                        boolean isFavorite = currentUser.getFavorite().contains(selectedPlayer);
-
-                        // Create a confirmation dialog
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
-                        alert.setTitle(isFavorite ? "Remove Favorite" : "Add Favorite");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Are you sure you want to " + (isFavorite ? "remove" : "add") + " " +
-                                selectedPlayer.getUserName() + " as a " + (isFavorite ? "non-" : "") + "favorite?");
-
-                        // Show the confirmation dialog and wait for the result
-                        alert.showAndWait().ifPresent(result -> {
-                            if (result == ButtonType.OK) {
-                                if (isFavorite) {
-                                    database.removeFavoritePlayer(currentUser, selectedPlayer);
-                                } else {
-                                    database.addFavoritePlayer(currentUser, selectedPlayer);
-                                }
-
-                                // Update the rowData's favorite status and refresh the table
-                                rowData.setFavorite(!isFavorite);
-                                leaderboardTable.refresh();
-                            }
-                        });
+                    if (selectedPlayer.getUserName().equals(currentUser.getUserName())){
+                        selectedPlayer = null;
+                    }
+                    if (selectedPlayer != null) {
+                        // Show the player profile dialog
+                        showProfileDialog(selectedPlayer);
                     }
                 }
             });
             return row;
         });
+    }
+
+    private void showProfileDialog(Player selectedPlayer) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/mancalapro/PlayerProfileDialogue.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller and set the player
+            ProfileDialogueController controller = loader.getController();
+            String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
+            Player currentUser = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
+            controller.setPlayer(selectedPlayer, currentUser);
+
+            // Set the callback to refresh the table
+            controller.setOnFavoriteButtonClick(() -> {
+                loadLeaderboardData();
+            });
+
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setScene(new Scene(root));
+            dialogStage.setTitle(selectedPlayer.getUserName() + "'s Profile");
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

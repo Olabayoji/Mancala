@@ -47,6 +47,10 @@ public class ProfileController implements Initializable {
     @FXML
     private Text ranking;
     @FXML
+    private Text privacy;
+    @FXML
+    private Button btnPrivacy;
+    @FXML
     private Button btnChangeImage;
     @FXML
     private ImageView profileImage;
@@ -77,6 +81,9 @@ public class ProfileController implements Initializable {
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
         User user = DatabaseManager.getDatabaseInstance().getUser(currentUsername);
+        if (user instanceof Admin){
+            btnPrivacy.setDisable(true);
+        }
 
         if (user != null) {
             username.setText(user.getUserName());
@@ -98,19 +105,23 @@ public class ProfileController implements Initializable {
                 List<Player> sortedPlayers = DatabaseManager.getDatabaseInstance().getPlayersSortedByWinRatio();
                 int playerRanking = getPlayerRanking(player, sortedPlayers);
                 ranking.setText(Integer.toString(playerRanking));
-                if (player.getFavorite().size() > 0) {
-                    System.out.println("more than 1");
-                } else {
-                    System.out.println("no friends");
-                }
-                for (Player us : player.getFavorite()) {
-                    System.out.println(us.getFirstName());
-                }
+                privacy.setText(player.isPublicProfile() ? "Public": "Private");
+
+//                if (player.getFavorite().size() > 0) {
+//                    System.out.println("more than 1");
+//                } else {
+//                    System.out.println("no friends");
+//                }
+//                for (Player us : player.getFavorite()) {
+//                    System.out.println(us.getFirstName());
+//                }
             }else{
                 numberOfGames.setText("--");
                 numberOfWins.setText("--");
                 winRatio.setText("--");
                 ranking.setText("--");
+                privacy.setText("--");
+
             }
         }
 
@@ -129,7 +140,12 @@ public class ProfileController implements Initializable {
 
         });
 
-
+        btnPrivacy.setOnAction(event -> {
+            Player player = (Player) user;
+             player.setPublicProfile();
+            String privacyText = player.isPublicProfile() ? "Public" : "Private";
+            privacy.setText(privacyText);
+        });
 
         btnChangeImage.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();

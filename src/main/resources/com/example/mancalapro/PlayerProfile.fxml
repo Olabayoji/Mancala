@@ -28,38 +28,44 @@
                         <Image url="@assets/profile-icon.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="btnChangeImage" mnemonicParsing="false" text="Change Image">
-               <font>
-                  <Font name="Monospaced Regular" size="13.0" />
-               </font></Button>
+                <Button fx:id="btnChangeImage" mnemonicParsing="false" text="Change Image">
+                    <font>
+                        <Font name="Monospaced Regular" size="13.0" />
+                    </font>
+                </Button>
                 <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
-               <font>
-                  <Font name="Monospaced Bold" size="13.0" />
-               </font></Text>
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                    </font>
+                </Text>
             </children>
         </VBox>
         <VBox layoutX="426.0" layoutY="318.0" spacing="4.0">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FIRST NAME">
-               <font>
-                  <Font name="Monospaced Bold" size="13.0" />
-               </font></Text>
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                    </font>
+                </Text>
                 <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin ">
-               <font>
-                  <Font name="Monospaced Regular" size="13.0" />
-               </font></Text>
+                    <font>
+                        <Font name="Monospaced Regular" size="13.0" />
+                    </font>
+                </Text>
             </children>
         </VBox>
         <VBox layoutX="804.0" layoutY="317.0" spacing="4.0">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LAST NAME">
-               <font>
-                  <Font name="Monospaced Bold" size="13.0" />
-               </font></Text>
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                    </font>
+                </Text>
                 <Text fx:id="lastName" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin ">
-               <font>
-                  <Font name="Monospaced Regular" size="13.0" />
-               </font></Text>
+                    <font>
+                        <Font name="Monospaced Regular" size="13.0" />
+                    </font>
+                </Text>
             </children>
         </VBox>
         <VBox layoutX="565.0" layoutY="403.0" spacing="16.0">
@@ -67,60 +73,83 @@
                 <HBox spacing="4.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RANKING: ">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Text>
                         <Text fx:id="ranking" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
-                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Regular" size="13.0" />
+                            </font>
+                        </Text>
                     </children>
                 </HBox>
                 <HBox spacing="4.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL MATCHES:">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Text>
                         <Text fx:id="numberOfGames" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
-                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Regular" size="13.0" />
+                            </font>
+                        </Text>
                     </children>
                 </HBox>
                 <HBox spacing="4.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL WINS:">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Text>
                         <Text fx:id="numberOfWins" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
-                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Regular" size="13.0" />
+                            </font>
+                        </Text>
                     </children>
                 </HBox>
                 <HBox spacing="4.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WIN %:">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Text>
                         <Text fx:id="winRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
-                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Regular" size="13.0" />
+                            </font>
+                        </Text>
                     </children>
                 </HBox>
                 <HBox layoutX="10.0" layoutY="109.0" spacing="4.0">
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LAST LOGIN:">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font></Text>
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Text>
                         <Text fx:id="lastLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
                     </children>
                 </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" spacing="4.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Privacy:">
+                     <font>
+                        <Font name="Monospaced Bold" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="privacy" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
+                     <font>
+                        <Font name="Monospaced Regular" size="13.0" />
+                     </font></Text>
+                  <Button fx:id="btnPrivacy" mnemonicParsing="false" text="Change Privacy" />
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>
