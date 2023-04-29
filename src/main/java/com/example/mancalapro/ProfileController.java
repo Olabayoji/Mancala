@@ -128,7 +128,14 @@ public class ProfileController implements Initializable {
         // System.out.println(user.getFirstName());
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                FXMLLoader loader;
+                if (user instanceof Player){
+                     loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                }
+                else {
+                     loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
+
+                }
                 root = loader.load();
                 stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                 scene = new Scene(root);
