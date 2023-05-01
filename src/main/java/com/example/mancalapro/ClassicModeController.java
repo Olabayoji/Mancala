@@ -1,6 +1,7 @@
 package com.example.mancalapro;
 
 import com.example.mancalapro.model.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,11 +54,20 @@ public class ClassicModeController implements Initializable {
 
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
-        Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser("player1");
-        Player p2 = (Player) DatabaseManager.getDatabaseInstance().getUser("opeyemi");
+        Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
+        Player p2 = (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer);
         game = new MancalaGame(p1, p2, false); // false for classic mode
         player1.setText(p1.getUserName());
         player2.setText(p2.getUserName());
+
+        // Update number of gamnes played
+        p1.setNumberOfGames(p1.getNumberOfGames() + 1);
+        p2.setNumberOfGames(p2.getNumberOfGames() + 1);
+
+        // Update the players' information in the database
+        DatabaseManager.getDatabaseInstance().updateUser(p1);
+        DatabaseManager.getDatabaseInstance().updateUser(p2);
+
 
         // Initialize labels and pits arrays
         labels = new Label[]{label0, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13};
@@ -80,25 +90,41 @@ public class ClassicModeController implements Initializable {
                     alert.showAndWait();
                     return;
                 }
-                if (!game.isGameOver()) {
-                    game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1); // Pass null for PowerUp in classic mode
+                game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1); // Pass null for PowerUp in classic mode
+                updateUI(p1, p2);
+                boolean gameOver = game.isGameOver();
+
+                if (gameOver) {
+                    System.out.println("Game over");
+                    int winner = game.getWinner();
                     updateUI(p1, p2);
+                    showGameOverAlert(winner, p1, p2);
                 }
-                // TODO add additional logic to handle the end of the game, player turn change, etc.
             });
 
 
         }
 
         btnMainMenu.setOnMouseClicked(mouseEvent -> {
-
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Mancala Game");
                 alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to end the game?\nThis will automatically count as a loss");
+                alert.setContentText(game.isGameOver() ? "Great Game" : "Are you sure you want to end the game?\nThis will automatically count as a loss " + game.getCurrentPlayer().getUserName());
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (!game.isGameOver()) {
+                        Player currentPlayer = game.getCurrentPlayer();
+                        Player otherPlayer = currentPlayer == p1 ? p2 : p1;
+
+                        currentPlayer.setNumberOfLosses(currentPlayer.getNumberOfLosses() + 1);
+                        otherPlayer.setNumberOfWins(otherPlayer.getNumberOfWins() + 1);
+
+                        // Update the players' information in the database
+                        DatabaseManager.getDatabaseInstance().updateUser(currentPlayer);
+                        DatabaseManager.getDatabaseInstance().updateUser(otherPlayer);
+                    }
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
                     root = loader.load();
                     stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -109,8 +135,8 @@ public class ClassicModeController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         });
+
     }
 
     private void updateUI(Player currentUser, Player secondPlayer) {
@@ -156,5 +182,35 @@ public class ClassicModeController implements Initializable {
         }
     }
 
+    private void showGameOverAlert(int winner, Player p1, Player p2) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+
+        if (winner == -1) {
+            alert.setHeaderText("The game is a draw!");
+            p1.setNumberOfGames(p1.getNumberOfGames() + 1);
+            p2.setNumberOfGames(p2.getNumberOfGames() + 1);
+        } else {
+            Player winningPlayer = winner == 0 ? p1 : p2;
+            Player losingPlayer = winner == 0 ? p2 : p1;
+
+            winningPlayer.setNumberOfWins(winningPlayer.getNumberOfWins() + 1);
+            losingPlayer.setNumberOfGames(losingPlayer.getNumberOfGames() + 1);
+
+            // Update the players' information in the database
+            DatabaseManager.getDatabaseInstance().updateUser(winningPlayer);
+            DatabaseManager.getDatabaseInstance().updateUser(losingPlayer);
+
+            alert.setHeaderText("Player " + winningPlayer.getUserName() + " wins the game!");
+        }
+        alert.setOnCloseRequest(dialogEvent -> {
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.close();
+        });
+
+        alert.showAndWait();
+    }
+
 
 }
+

@@ -5,6 +5,7 @@ import java.util.*;
 public class Player extends User {
     private int numberOfGames;
     private int numberOfWins;
+    private int numberOfLosses;
     private boolean publicProfile;
     private List<Player> favorite;
     private Map<PowerUp, Integer> powerUps;
@@ -14,6 +15,7 @@ public class Player extends User {
         super(firstName, lastName, userName, profileImage, password);
         this.numberOfGames = 0;
         this.numberOfWins = 0;
+        this.numberOfLosses = 0;
         this.favorite = new ArrayList<>();
         this.publicProfile = publicProfile;
         powerUps = new HashMap<>();
@@ -58,6 +60,22 @@ public class Player extends User {
         if (userToUpdate != null) {
             userToUpdate.isPublicProfile();
         }
+    }
+
+    public int getNumberOfLosses() {
+        return numberOfLosses;
+    }
+
+    public void setNumberOfLosses(int numberOfLosses) {
+        this.numberOfLosses = numberOfLosses;
+    }
+
+    public Map<PowerUp, Integer> getPowerUps() {
+        return powerUps;
+    }
+
+    public void setPowerUps(Map<PowerUp, Integer> powerUps) {
+        this.powerUps = powerUps;
     }
 
     public List<Player> getFavorite() {

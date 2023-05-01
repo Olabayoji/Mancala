@@ -46,11 +46,17 @@ public class Board {
     }
 
     public boolean isSideEmpty(int playerIndex) {
+
         for (int col = 0; col < HOLES_PER_ROW; col++) {
             if (!holes[playerIndex][col].isEmpty()) {
+                System.out.println(holes[playerIndex][col].isEmpty());
+                System.out.println("Is side empty called: false" );
+
                 return false;
             }
         }
+        System.out.println("Is side empty called: true" );
+
         return true;
     }
 

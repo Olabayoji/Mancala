@@ -50,14 +50,14 @@ public class MancalaGame {
         int nextPlayerIndex = currentPlayerIndex == 0 ? 0 : 1;
 
         List<Stone> stones = hole.pickUpStones();
-        System.out.println("total number of stones: " + stones.size());
+//        System.out.println("total number of stones: " + stones.size());
         int position = holeIndex;
         boolean extraTurn = false;
         boolean myStore = true;
 
         while (!stones.isEmpty()) {
             position = (position + 1) % (Board.HOLES_PER_ROW + 1);
-            System.out.println("Postion: " + position + "No of stones: " + stones.size());
+//            System.out.println("Postion: " + position + "No of stones: " + stones.size());
 //            System.out.println(stones.size());
 
             if (position == Board.HOLES_PER_ROW) {
@@ -100,6 +100,7 @@ public class MancalaGame {
 
 
     public boolean isGameOver() {
+//        System.out.println("Game over called");
         return board.isSideEmpty(0) || board.isSideEmpty(1);
     }
 

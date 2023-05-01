@@ -89,7 +89,7 @@ public class RankingScreenController implements Initializable {
             boolean favorite = currentUser.getFavorite().contains(player);
 
             LeaderBoardRow playerRow = new LeaderBoardRow(ranking, player.getUserName(), player.getNumberOfGames(),
-                    player.getNumberOfGames() - player.getNumberOfWins(), player.getNumberOfWins(), winPercentage,
+                    player.getNumberOfLosses(), player.getNumberOfWins(), winPercentage,
                     favorite);
             if (player.isApproved()) {
                 playerRows.add(playerRow);

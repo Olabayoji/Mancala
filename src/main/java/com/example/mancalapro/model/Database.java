@@ -109,6 +109,16 @@ public class Database {
         return sortedPlayers;
     }
 
+    public boolean updateUser(Player player) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUserName().equals(player.getUserName())) {
+                players.set(i, player);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void loadUsersFromJsonFile(String filePath) {
         try {
             String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -129,6 +139,7 @@ public class Database {
                             userJsonObj.getString("password"),
                             userJsonObj.getBoolean("publicProfile"));
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
+                    ((Player) user).setNumberOfLosses(userJsonObj.getInt("numberOfLosses"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
                     user.setApproved(userJsonObj.getBoolean("approved"));
                 } else if ("admin".equals(type)) {
@@ -201,6 +212,7 @@ public class Database {
                 userJsonObj.put("type", "player");
                 userJsonObj.put("numberOfGames", player.getNumberOfGames());
                 userJsonObj.put("numberOfWins", player.getNumberOfWins());
+                userJsonObj.put("numberOfLosses", player.getNumberOfLosses());
                 userJsonObj.put("favorite", player.getFavorite());
                 userJsonObj.put("publicProfile", player.isPublicProfile());
 
