@@ -1,5 +1,9 @@
 package com.example.mancalapro;
 
+import com.example.mancalapro.model.Bot;
+import com.example.mancalapro.model.ContextManager;
+import com.example.mancalapro.model.DatabaseManager;
+import com.example.mancalapro.model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,6 +64,14 @@ public class ModeSelectionController implements Initializable {
         btnClassicAI.setOnMouseClicked(mouseEvent -> {
 
             try {
+                DatabaseManager.saveDatabaseInstance();
+                ContextManager contextManager = ContextManager.getInstance();
+
+
+                // Store the second player's username in ContextManager
+                contextManager.addToContext("secondPlayer", "Bot");
+
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
                 root = loader.load();
                 stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();

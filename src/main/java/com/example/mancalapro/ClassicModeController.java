@@ -110,7 +110,7 @@ public class ClassicModeController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Mancala Game");
                 alert.setHeaderText(null);
-                alert.setContentText(game.isGameOver() ? "Great Game" : "Are you sure you want to end the game?\nThis will automatically count as a loss " + game.getCurrentPlayer().getUserName());
+                alert.setContentText(game.isGameOver() ? "Great Game" : "Are you sure you want to end the game " +  game.getCurrentPlayer().getUserName() +"?\nThis will automatically count as a loss" );
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     if (!game.isGameOver()) {

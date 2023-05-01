@@ -90,8 +90,7 @@ public class Player extends User {
         if (getNumberOfGames() == 0) {
             return 0;
         }
-        return getNumberOfWins() / getNumberOfGames();
-    }
+        return (double) getNumberOfWins() / (double) getNumberOfGames();    }
 
     public void removeFavorite(Player selectedPlayer) {
         favorite.remove(selectedPlayer);

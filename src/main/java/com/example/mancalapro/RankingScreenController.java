@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -83,7 +84,8 @@ public class RankingScreenController implements Initializable {
 
         int ranking = 1;
         for (Player player : players) {
-            double winPercentage = player.getWinRatio() * 100;
+            DecimalFormat df = new DecimalFormat("###.##");
+            double winPercentage = Double.parseDouble(df.format(player.getWinRatio() * 100));
             String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
             Player currentUser = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
             boolean favorite = currentUser.getFavorite().contains(player);
