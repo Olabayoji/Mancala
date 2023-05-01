@@ -13,7 +13,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         DatabaseManager.getDatabaseInstance().loadUsersFromJsonFile(databasePath);
-        Parent root = FXMLLoader.load(MainApp.class.getResource("StartScreen.fxml"));
+        Parent root = FXMLLoader.load(MainApp.class.getResource("ClassicScreen.fxml"));
         Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add(MainApp.class.getResource("main.css").toExternalForm());
 

@@ -53,8 +53,8 @@ public class ClassicModeController implements Initializable {
 
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
-        Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-        Player p2 = (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer);
+        Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser("player1");
+        Player p2 = (Player) DatabaseManager.getDatabaseInstance().getUser("opeyemi");
         game = new MancalaGame(p1, p2, false); // false for classic mode
         player1.setText(p1.getUserName());
         player2.setText(p2.getUserName());
@@ -81,7 +81,7 @@ public class ClassicModeController implements Initializable {
                     return;
                 }
                 if (!game.isGameOver()) {
-                    game.move(pitIndex, null); // Pass null for PowerUp in classic mode
+                    game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1); // Pass null for PowerUp in classic mode
                     updateUI(p1, p2);
                 }
                 // TODO add additional logic to handle the end of the game, player turn change, etc.

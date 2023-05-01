@@ -33,7 +33,8 @@ public class MancalaGame {
         return getCurrentPlayer().usePowerUp(powerUp);
     }
 
-    public boolean move(int holeIndex, PowerUp powerUp) {
+    public boolean move(int holeIndex, PowerUp powerUp, int side) {
+
         holeIndex = holeIndex < 6 ? holeIndex : holeIndex - 7;
         // Handle power-ups before making the move
         if (isArcadeMode && powerUp != null) {
@@ -49,21 +50,31 @@ public class MancalaGame {
         int nextPlayerIndex = currentPlayerIndex == 0 ? 0 : 1;
 
         List<Stone> stones = hole.pickUpStones();
+        System.out.println("total number of stones: " + stones.size());
         int position = holeIndex;
         boolean extraTurn = false;
+        boolean myStore = true;
 
         while (!stones.isEmpty()) {
-            Stone stone = stones.remove(0);
             position = (position + 1) % (Board.HOLES_PER_ROW + 1);
-            System.out.println(position);
+            System.out.println("Postion: " + position + "No of stones: " + stones.size());
+//            System.out.println(stones.size());
 
             if (position == Board.HOLES_PER_ROW) {
-                board.addStoneToStore(currentPlayerIndex, stone);
+                if (myStore) {
+                    Stone stone = stones.remove(0);
+                    board.addStoneToStore(currentPlayerIndex, stone);
+                }
+                myStore = !myStore;
+
+
+                side = (side + 1) % 2;
                 if (stones.isEmpty()) { // Check if it's the last stone
                     extraTurn = true;
                 }
             } else {
-                Hole nextHole = board.getHole(currentPlayerIndex, position);
+                Hole nextHole = board.getHole(side, position);
+                Stone stone = stones.remove(0);
                 nextHole.addStone(Stone.createSpecialStoneWithChance());
                 Stone lastStone = nextHole.getLastStone();
 
