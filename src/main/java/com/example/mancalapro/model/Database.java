@@ -9,9 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Database {
     private List<Player> players;
@@ -208,8 +206,12 @@ public class Database {
 
                 // Save favorite players
                 JSONArray favoriteJsonArray = new JSONArray();
+                Set<String> favoriteUsernames = new HashSet<>(); // Use a Set to store unique favorite player usernames
                 for (Player favoritePlayer : player.getFavorite()) {
-                    favoriteJsonArray.put(favoritePlayer.getUserName());
+                    favoriteUsernames.add(favoritePlayer.getUserName());
+                }
+                for (String favoriteUsername : favoriteUsernames) {
+                    favoriteJsonArray.put(favoriteUsername);
                 }
                 userJsonObj.put("favorite", favoriteJsonArray);
 

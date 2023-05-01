@@ -71,9 +71,9 @@ public class RegisterController implements Initializable {
 
         btnRegister.setOnMouseClicked(mouseEvent -> {
             try {
-                String firstname = firstName.getText().trim();
-                String username = this.username.getText().trim();
-                String lastname = this.lastName.getText().trim();
+                String firstname = firstName.getText().trim().toLowerCase();
+                String username = this.username.getText().trim().toLowerCase();
+                String lastname = this.lastName.getText().trim().toLowerCase();
                 String password = this.password.getText();
 
                 // Validation checks

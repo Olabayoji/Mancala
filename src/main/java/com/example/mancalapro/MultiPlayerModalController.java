@@ -24,32 +24,38 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class StartScreenController implements Initializable {
-    @FXML
-    private AnchorPane rootPane;
+public class MultiPlayerModalController implements Initializable {
+
     @FXML
     private Text txErrorMsg;
-    @FXML
-    private Text btnRegister;
     @FXML
     private TextField txtUsername;
     @FXML
     private PasswordField txtPassword;
     @FXML
-    private Button btnLogin;
+    private Button btnAdd;
 
     private Parent root;
-    private  Stage stage;
+    private Stage stage;
     private Scene scene;
-    private int loginAttempts;
-    String databasePath = "./src/main/gameData/database.json";
 
+
+    private void closeModal(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Retrieve the current user's username from ContextManager
+        String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
 
-        loginAttempts = 5;
-        btnLogin.setOnAction(new EventHandler<ActionEvent>() {
+        // Retrieve the current user's instance from the Database through
+        // DatabaseManager
+        User currentUser = DatabaseManager.getDatabaseInstance().getUser(currentUsername);
+
+
+        btnAdd.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String username = txtUsername.getText().toLowerCase();
@@ -64,23 +70,30 @@ public class StartScreenController implements Initializable {
                 Database database = Database.getInstance();
                 User user = database.getUser(username);
 
-                if (user != null && user.getPassword().equals(password) && user.isApproved()) {
+                if (username.equals(currentUser.getUserName())) {
+                    txErrorMsg.setFill(Color.FIREBRICK);
+                    txErrorMsg.setText("You cannot play against yourself");
+                    return;
+
+                }
+                if (user != null && user.getPassword().equals(password) && user.isApproved() && user instanceof Player) {
                     txErrorMsg.setFill(Color.FORESTGREEN);
                     txErrorMsg.setText("Login successful.");
-//                    System.out.println(user instanceof Player);
 
                     user.updateLastLogin();
 //                    DatabaseManager.saveDatabaseInstance();
+                    ContextManager contextManager = ContextManager.getInstance();
+
+                    // Store the second player's username in ContextManager
+                    contextManager.addToContext("secondPlayer", user.getUserName());
+                    ;
+                    // Close the modal stage
+                    Stage modalStage = (Stage) btnAdd.getScene().getWindow();
+                    modalStage.close();
+
                     try {
-                        ContextManager contextManager = ContextManager.getInstance();
-                        // Store the current user's username in ContextManager
-                        ContextManager.getInstance().addToContext("currentUser", user.getUserName());
-                        FXMLLoader loader;
-                         if (user instanceof Player){
-                             loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                         }else{
-                             loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
-                         }
+                        // Navigate to ClassicScreen.fxml
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
                         root = loader.load();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
@@ -89,36 +102,19 @@ public class StartScreenController implements Initializable {
                     } catch (/* InterruptedException | */IOException e) {
                         throw new RuntimeException(e);
                     }
+
                 } else if (user != null && user.getPassword().equals(password) && !user.isApproved()) {
                     txErrorMsg.setFill(Color.FIREBRICK);
                     txErrorMsg.setText(
-                            "Contact admin.\nYou need to be approved");
+                            "Contact admin.\nPlayer needs to be approved");
                 } else {
                     txErrorMsg.setFill(Color.FIREBRICK);
                     txErrorMsg.setText(
-                            "Incorrect username/password. \n" + --loginAttempts + " login attempts remaining.");
-                    if (loginAttempts == 0) {
-                        Platform.exit();
-                        System.exit(0);
-                    }
+                            "Incorrect username/password.");
+
                 }
             }
         });
 
-        btnRegister.setOnMouseClicked(mouseEvent -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
-                root = loader.load();
-                stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (/* InterruptedException | */IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        });
     }
-
-    // public void initManager
 }

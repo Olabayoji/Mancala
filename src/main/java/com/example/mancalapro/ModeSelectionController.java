@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class ModeSelectionController implements Initializable {
             }
 
         });
-        btnClassic.setOnMouseClicked(mouseEvent -> {
+        btnClassicAI.setOnMouseClicked(mouseEvent -> {
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
@@ -66,6 +67,28 @@ public class ModeSelectionController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             } catch (/* InterruptedException | */IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+        btnClassic.setOnMouseClicked(mouseEvent -> {
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiPlayerModal.fxml"));
+                Parent modalRoot = loader.load();
+                Stage modalStage = new Stage();
+
+                // Set up the modal stage
+                modalStage.initModality(Modality.APPLICATION_MODAL);
+                modalStage.initOwner(rootPane.getScene().getWindow());
+                modalStage.setTitle("Classic Mode (VS Human)");
+
+                Scene modalScene = new Scene(modalRoot);
+                modalStage.setScene(modalScene);
+
+                // Show the modal and wait for it to be closed
+                modalStage.showAndWait();
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 

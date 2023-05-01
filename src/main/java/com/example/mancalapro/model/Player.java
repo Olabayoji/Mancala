@@ -1,15 +1,14 @@
 package com.example.mancalapro.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Player extends User {
     private int numberOfGames;
     private int numberOfWins;
     private boolean publicProfile;
     private List<Player> favorite;
+    private Map<PowerUp, Integer> powerUps;
+
 
     public Player(String firstName, String lastName, String userName, String profileImage, String password, boolean publicProfile) {
         super(firstName, lastName, userName, profileImage, password);
@@ -17,6 +16,9 @@ public class Player extends User {
         this.numberOfWins = 0;
         this.favorite = new ArrayList<>();
         this.publicProfile = publicProfile;
+        powerUps = new HashMap<>();
+        powerUps.put(PowerUp.CONTINUE_TURN, 1);
+        powerUps.put(PowerUp.DOUBLE_POINTS, 1);
     }
 
 
@@ -75,6 +77,14 @@ public class Player extends User {
 
     public void removeFavorite(Player selectedPlayer) {
         favorite.remove(selectedPlayer);
+    }
+    public boolean usePowerUp(PowerUp powerUp) {
+        int count = powerUps.getOrDefault(powerUp, 0);
+        if (count > 0) {
+            powerUps.put(powerUp, count - 1);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -64,12 +64,10 @@ public class ProfileController implements Initializable {
         return -1;
     }
     public void updateProfileImage(User user, String newImageUrl) {
-        // Assuming your database instance is called "database"
         User userToUpdate = Database.getInstance().getUser(user.getUserName());
 
         if (userToUpdate != null) {
             userToUpdate.setProfileImage(newImageUrl);
-            // Add code to save the changes in the database if necessary
         }
     }
 
