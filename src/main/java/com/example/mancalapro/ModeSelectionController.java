@@ -49,14 +49,27 @@ public class ModeSelectionController implements Initializable {
         btnArcade.setOnMouseClicked(mouseEvent -> {
 
             try {
-                // Thread.sleep(2000);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("ArcadeScreen.fxml"));
-                root = loader.load();
-                stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (/* InterruptedException | */IOException e) {
+                DatabaseManager.saveDatabaseInstance();
+                ContextManager contextManager = ContextManager.getInstance();
+                // Store the game mode in ContextManager
+                contextManager.addToContext("mode", "human");
+                contextManager.addToContext("type", "Arcade");
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiPlayerModal.fxml"));
+                Parent modalRoot = loader.load();
+                Stage modalStage = new Stage();
+
+                // Set up the modal stage
+                modalStage.initModality(Modality.APPLICATION_MODAL);
+                modalStage.initOwner(rootPane.getScene().getWindow());
+                modalStage.setTitle("Classic Mode (VS Human)");
+
+                Scene modalScene = new Scene(modalRoot);
+                modalStage.setScene(modalScene);
+
+                // Show the modal and wait for it to be closed
+                modalStage.showAndWait();
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
@@ -89,6 +102,8 @@ public class ModeSelectionController implements Initializable {
                 ContextManager contextManager = ContextManager.getInstance();
                 // Store the game mode in ContextManager
                 contextManager.addToContext("mode", "human");
+                contextManager.addToContext("type", "Classic");
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiPlayerModal.fxml"));
                 Parent modalRoot = loader.load();
                 Stage modalStage = new Stage();

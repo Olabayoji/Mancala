@@ -24,8 +24,7 @@ import java.util.ResourceBundle;
 
 public class ClassicModeController implements Initializable {
 
-    @FXML
-    private AnchorPane rootPane;
+
     @FXML
     private ImageView btnMainMenu;
     @FXML
@@ -148,9 +147,12 @@ public class ClassicModeController implements Initializable {
             root = loader.load();
             stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             stage.close();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            String mode = (String) ContextManager.getInstance().retrieveFromContext("mode");
+          if (!mode.equals("human")){
+              scene = new Scene(root);
+              stage.setScene(scene);
+              stage.show();
+          }
         }
     }
 

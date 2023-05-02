@@ -85,14 +85,14 @@ public class MultiPlayerModalController implements Initializable {
 
                     // Store the second player's username in ContextManager
                     contextManager.addToContext("secondPlayer", user.getUserName());
-                    ;
+                    String gameType = (String) contextManager.retrieveFromContext("type");
                     // Close the modal stage
                     Stage modalStage = (Stage) btnAdd.getScene().getWindow();
                     modalStage.close();
 
                     try {
                         // Navigate to ClassicScreen.fxml
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(gameType.equals("Classic") ? "ClassicScreen.fxml" : "ArcadeScreen.fxml"));
                         root = loader.load();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
