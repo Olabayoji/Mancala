@@ -42,7 +42,6 @@ public class MainMenuController implements Initializable {
     private String username;
     final String DATABASEPATH = "./src/main/gameData/database.json";
 
-
     public void setUsername(String username) {
         this.username = username;
     }

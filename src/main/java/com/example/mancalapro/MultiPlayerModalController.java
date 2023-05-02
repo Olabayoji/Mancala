@@ -39,7 +39,6 @@ public class MultiPlayerModalController implements Initializable {
     private Stage stage;
     private Scene scene;
 
-
     private void closeModal(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -53,7 +52,6 @@ public class MultiPlayerModalController implements Initializable {
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
         User currentUser = DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-
 
         btnAdd.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -76,12 +74,13 @@ public class MultiPlayerModalController implements Initializable {
                     return;
 
                 }
-                if (user != null && user.getPassword().equals(password) && user.isApproved() && user instanceof Player) {
+                if (user != null && user.getPassword().equals(password) && user.isApproved()
+                        && user instanceof Player) {
                     txErrorMsg.setFill(Color.FORESTGREEN);
                     txErrorMsg.setText("Login successful.");
 
                     user.updateLastLogin();
-//                    DatabaseManager.saveDatabaseInstance();
+                    // DatabaseManager.saveDatabaseInstance();
                     ContextManager contextManager = ContextManager.getInstance();
 
                     // Store the second player's username in ContextManager

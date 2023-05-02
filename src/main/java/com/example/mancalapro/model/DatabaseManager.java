@@ -23,11 +23,10 @@ public class DatabaseManager {
     public static void saveDatabaseInstance() {
         if (database != null) {
             database.saveUsersToJsonFile(DATABASE_FILE);
-//            System.out.println("I saved");
+            // System.out.println("I saved");
         }
-//        System.out.println("I did not saved");
+        // System.out.println("I did not saved");
 
     }
 
 }
-

@@ -29,7 +29,8 @@ public class ClassicModeController implements Initializable {
     @FXML
     private ImageView btnMainMenu;
     @FXML
-    private Label label0, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13;
+    private Label label0, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11,
+            label12, label13;
     @FXML
     private Pane pit0, pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10, pit11, pit12, pit13;
     @FXML
@@ -50,12 +51,13 @@ public class ClassicModeController implements Initializable {
         // Retrieve the players username from ContextManager
         String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
         String secondPlayer = (String) ContextManager.getInstance().retrieveFromContext("secondPlayer");
-
+        String mode = (String) ContextManager.getInstance().retrieveFromContext("mode");
 
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
         Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-        Player p2 = (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer);
+        Player p2 = mode.equals("human") ? (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer) : new Bot();
+
         game = new MancalaGame(p1, p2, false); // false for classic mode
         player1.setText(p1.getUserName());
         player2.setText(p2.getUserName());
@@ -68,76 +70,106 @@ public class ClassicModeController implements Initializable {
         DatabaseManager.getDatabaseInstance().updateUser(p1);
         DatabaseManager.getDatabaseInstance().updateUser(p2);
 
-
         // Initialize labels and pits arrays
-        labels = new Label[]{label0, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10, label11, label12, label13};
+        labels = new Label[]{label0, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10,
+                label11, label12, label13};
         pits = new Pane[]{pit0, pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10, pit11, pit12, pit13};
 
         // Update UI with initial board state
         updateUI(p1, p2);
-
+        // Make the bot play automatically if it's the starting player
+        if (game.getCurrentPlayer() instanceof Bot) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("START GAME");
+            alert.setHeaderText("Click any hole on the board to start the game.");
+            alert.showAndWait();
+        }
 
         // Add click event listeners to pits
         for (int i = 0; i < 14; i++) {
 
-            if (i == 6 || i == 13) continue; // Skip stores
+            if (i == 6 || i == 13)
+                continue; // Skip stores
             final int pitIndex = i;
             pits[i].setOnMouseClicked(event -> {
-                if (pitIndex > 6 && game.getCurrentPlayer().equals(p1) || pitIndex < 6 && game.getCurrentPlayer().equals(p2)) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("INVALID MOVE");
-                    alert.setHeaderText("You cannot choose another player's hole.");
-                    alert.showAndWait();
-                    return;
-                }
-                game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1); // Pass null for PowerUp in classic mode
-                updateUI(p1, p2);
-                boolean gameOver = game.isGameOver();
-
-                if (gameOver) {
-                    System.out.println("Game over");
-                    int winner = game.getWinner();
-                    updateUI(p1, p2);
-                    showGameOverAlert(winner, p1, p2);
-                }
+                handlePlayerMove(pitIndex, p1, p2);
             });
-
 
         }
 
         btnMainMenu.setOnMouseClicked(mouseEvent -> {
             try {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Mancala Game");
-                alert.setHeaderText(null);
-                alert.setContentText(game.isGameOver() ? "Great Game" : "Are you sure you want to end the game " +  game.getCurrentPlayer().getUserName() +"?\nThis will automatically count as a loss" );
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    if (!game.isGameOver()) {
-                        Player currentPlayer = game.getCurrentPlayer();
-                        Player otherPlayer = currentPlayer == p1 ? p2 : p1;
-
-                        currentPlayer.setNumberOfLosses(currentPlayer.getNumberOfLosses() + 1);
-                        otherPlayer.setNumberOfWins(otherPlayer.getNumberOfWins() + 1);
-
-                        // Update the players' information in the database
-                        DatabaseManager.getDatabaseInstance().updateUser(currentPlayer);
-                        DatabaseManager.getDatabaseInstance().updateUser(otherPlayer);
-                    }
-
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                    root = loader.load();
-                    stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                }
+                handleMainMenuClick(p1, p2, mouseEvent);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
 
+
     }
+
+    private void handlePlayerMove(int pitIndex, Player p1, Player p2) {
+        if (!(game.getCurrentPlayer() instanceof Bot) && (pitIndex > 6 && game.getCurrentPlayer().equals(p1) || pitIndex < 6 && game.getCurrentPlayer().equals(p2))) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("INVALID MOVE");
+            alert.setHeaderText("You cannot choose another player's hole.");
+            alert.showAndWait();
+            return;
+        }
+        // Pass null for PowerUp in classic mode
+        game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1);
+        updateUI(p1, p2);
+        boolean gameOver = game.isGameOver();
+
+        if (gameOver) {
+            System.out.println("Game over");
+            int winner = game.getWinner();
+            updateUI(p1, p2);
+            showGameOverAlert(winner, p1, p2);
+        } else if (game.getCurrentPlayer() instanceof Bot) {
+            int botMove = ((Bot) game.getCurrentPlayer()).generateMove(game.getBoard());
+            handlePlayerMove(botMove, p1, p2);
+        }
+    }
+
+    private void handleMainMenuClick(Player p1, Player p2, javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Mancala Game");
+        alert.setHeaderText(null);
+        alert.setContentText(game.isGameOver() ? "Great Game"
+                : "Are you sure you want to end the game " + game.getCurrentPlayer().getUserName()
+                + "?\nThis will automatically count as a loss");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // update current user's number of losses if game is cancelled without completion
+            handleGameOverWithoutCompletion(p1, p2);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModeSelection.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
+    private void handleGameOverWithoutCompletion(Player p1, Player p2) {
+        if (!game.isGameOver()) {
+            Player currentPlayer = game.getCurrentPlayer();
+            Player otherPlayer = currentPlayer == p1 ? p2 : p1;
+
+            currentPlayer.setNumberOfLosses(currentPlayer.getNumberOfLosses() + 1);
+            otherPlayer.setNumberOfWins(otherPlayer.getNumberOfWins() + 1);
+
+            // Update the players' information in the database
+            DatabaseManager.getDatabaseInstance().updateUser(currentPlayer);
+            if (!(otherPlayer instanceof Bot)) {
+                DatabaseManager.getDatabaseInstance().updateUser(otherPlayer);
+            }
+        }
+    }
+
 
     private void updateUI(Player currentUser, Player secondPlayer) {
         Board board = game.getBoard();
@@ -160,23 +192,23 @@ public class ClassicModeController implements Initializable {
             }
             labels[i].setText(Integer.toString(stoneCount));
 
-            if (i >= 0 && i <= 5 && game.getCurrentPlayer().getUserName().equals(currentUser.getUserName()) && stoneCount > 0) {
-//                pits[i].setStyle("-fx-background-color: #ffffff08;");
+            if (i >= 0 && i <= 5 && game.getCurrentPlayer().getUserName().equals(currentUser.getUserName())
+                    && stoneCount > 0) {
+                // pits[i].setStyle("-fx-background-color: #ffffff08;");
                 pits[i].setStyle("-fx-background-color: #d6d6d6;");
                 labels[i].setStyle("-fx-text-fill: #000");
 
-
-            } else if (i >= 7 && i <= 12 && !game.getCurrentPlayer().getUserName().equals(currentUser.getUserName()) && stoneCount > 0) {
-//                pits[i].setStyle("-fx-background-color: #ffffff08;");
+            } else if (i >= 7 && i <= 12 && !game.getCurrentPlayer().getUserName().equals(currentUser.getUserName())
+                    && stoneCount > 0 && !(game.getCurrentPlayer() instanceof Bot)) {
+                // pits[i].setStyle("-fx-background-color: #ffffff08;");
                 pits[i].setStyle("-fx-background-color: #d6d6d6;");
                 labels[i].setStyle("-fx-text-fill: #000");
             } else if (i == 6 || i == 13) {
                 pits[i].setStyle("");
             } else {
-//                pits[i].setStyle("-fx-background-color: #d6d6d6;");
+                // pits[i].setStyle("-fx-background-color: #d6d6d6;");
                 pits[i].setStyle("-fx-background-color: #ffffff08;");
                 labels[i].setStyle("-fx-text-fill: #fff");
-
 
             }
         }
@@ -185,22 +217,21 @@ public class ClassicModeController implements Initializable {
     private void showGameOverAlert(int winner, Player p1, Player p2) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Game Over");
-
+        String mode = (String) ContextManager.getInstance().retrieveFromContext("mode");
         if (winner == -1) {
             alert.setHeaderText("The game is a draw!");
-            p1.setNumberOfGames(p1.getNumberOfGames() + 1);
-            p2.setNumberOfGames(p2.getNumberOfGames() + 1);
         } else {
             Player winningPlayer = winner == 0 ? p1 : p2;
             Player losingPlayer = winner == 0 ? p2 : p1;
 
             winningPlayer.setNumberOfWins(winningPlayer.getNumberOfWins() + 1);
-            losingPlayer.setNumberOfGames(losingPlayer.getNumberOfGames() + 1);
+            losingPlayer.setNumberOfLosses(losingPlayer.getNumberOfLosses() + 1);
 
             // Update the players' information in the database
             DatabaseManager.getDatabaseInstance().updateUser(winningPlayer);
-            DatabaseManager.getDatabaseInstance().updateUser(losingPlayer);
-
+            if (mode.equals("human")) {// only update other player if
+                DatabaseManager.getDatabaseInstance().updateUser(losingPlayer);
+            }
             alert.setHeaderText("Player " + winningPlayer.getUserName() + " wins the game!");
         }
         alert.setOnCloseRequest(dialogEvent -> {
@@ -211,6 +242,4 @@ public class ClassicModeController implements Initializable {
         alert.showAndWait();
     }
 
-
 }
-

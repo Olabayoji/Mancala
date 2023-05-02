@@ -3,11 +3,16 @@ package com.example.mancalapro.model;
 import java.util.List;
 
 /**
- - getHole(int row, int col): Returns the hole at the specified row and column.
- - getStore(int playerIndex): Returns the number of stones in the specified player's store.
- - addStoneToStore(int playerIndex, Stone stone): Adds a stone to the specified player's store.
- - isSideEmpty(int playerIndex): Returns true if all holes on the specified player's side are empty, and false otherwise.
- - collectRemainingStones(int playerIndex): Collects the remaining stones from the specified player's side and adds them to their store.
+ * - getHole(int row, int col): Returns the hole at the specified row and
+ * column.
+ * - getStore(int playerIndex): Returns the number of stones in the specified
+ * player's store.
+ * - addStoneToStore(int playerIndex, Stone stone): Adds a stone to the
+ * specified player's store.
+ * - isSideEmpty(int playerIndex): Returns true if all holes on the specified
+ * player's side are empty, and false otherwise.
+ * - collectRemainingStones(int playerIndex): Collects the remaining stones from
+ * the specified player's side and adds them to their store.
  */
 public class Board {
     public static final int ROWS = 2;
@@ -50,12 +55,12 @@ public class Board {
         for (int col = 0; col < HOLES_PER_ROW; col++) {
             if (!holes[playerIndex][col].isEmpty()) {
                 System.out.println(holes[playerIndex][col].isEmpty());
-                System.out.println("Is side empty called: false" );
+                System.out.println("Is side empty called: false");
 
                 return false;
             }
         }
-        System.out.println("Is side empty called: true" );
+        System.out.println("Is side empty called: true");
 
         return true;
     }
@@ -79,7 +84,6 @@ public class Board {
         }
     }
 
-
     public void switchSides() {
         for (int i = 0; i < HOLES_PER_ROW; i++) {
             Hole hole0 = getHole(0, i);
@@ -89,7 +93,5 @@ public class Board {
             hole1.addStones(tempStones);
         }
     }
-
-
 
 }

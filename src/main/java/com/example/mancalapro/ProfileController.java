@@ -63,6 +63,7 @@ public class ProfileController implements Initializable {
         }
         return -1;
     }
+
     public void updateProfileImage(User user, String newImageUrl) {
         User userToUpdate = Database.getInstance().getUser(user.getUserName());
 
@@ -79,7 +80,7 @@ public class ProfileController implements Initializable {
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
         User user = DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-        if (user instanceof Admin){
+        if (user instanceof Admin) {
             btnPrivacy.setDisable(true);
         }
 
@@ -90,7 +91,7 @@ public class ProfileController implements Initializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             lastLogin.setText(user.getLastLogin().format(formatter).toString());
 
-            //check if user has a set a profile image
+            // check if user has a set a profile image
             if (user.getProfileImage() != null && !user.getProfileImage().isEmpty()) {
                 profileImage.setImage(new Image(user.getProfileImage()));
             }
@@ -103,17 +104,17 @@ public class ProfileController implements Initializable {
                 List<Player> sortedPlayers = DatabaseManager.getDatabaseInstance().getPlayersSortedByWinRatio();
                 int playerRanking = getPlayerRanking(player, sortedPlayers);
                 ranking.setText(Integer.toString(playerRanking));
-                privacy.setText(player.isPublicProfile() ? "Public": "Private");
+                privacy.setText(player.isPublicProfile() ? "Public" : "Private");
 
-//                if (player.getFavorite().size() > 0) {
-//                    System.out.println("more than 1");
-//                } else {
-//                    System.out.println("no friends");
-//                }
-//                for (Player us : player.getFavorite()) {
-//                    System.out.println(us.getFirstName());
-//                }
-            }else{
+                // if (player.getFavorite().size() > 0) {
+                // System.out.println("more than 1");
+                // } else {
+                // System.out.println("no friends");
+                // }
+                // for (Player us : player.getFavorite()) {
+                // System.out.println(us.getFirstName());
+                // }
+            } else {
                 numberOfGames.setText("--");
                 numberOfWins.setText("--");
                 winRatio.setText("--");
@@ -127,11 +128,10 @@ public class ProfileController implements Initializable {
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader;
-                if (user instanceof Player){
-                     loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-                }
-                else {
-                     loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
+                if (user instanceof Player) {
+                    loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+                } else {
+                    loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
 
                 }
                 root = loader.load();
@@ -147,7 +147,7 @@ public class ProfileController implements Initializable {
 
         btnPrivacy.setOnAction(event -> {
             Player player = (Player) user;
-             player.setPublicProfile();
+            player.setPublicProfile();
             String privacyText = player.isPublicProfile() ? "Public" : "Private";
             privacy.setText(privacyText);
         });

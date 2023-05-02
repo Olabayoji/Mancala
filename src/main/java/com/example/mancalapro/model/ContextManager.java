@@ -7,23 +7,24 @@ public class ContextManager {
 
     public static ContextManager instance;
 
-    private ContextManager(){
+    private ContextManager() {
         context = new HashMap<>();
     }
 
-    public static ContextManager getInstance(){
-        if(instance == null){
+    public static ContextManager getInstance() {
+        if (instance == null) {
             instance = new ContextManager();
         }
         return instance;
     }
+
     private Map<String, Object> context;
 
-    public Object retrieveFromContext(String key){
+    public Object retrieveFromContext(String key) {
         return context.get(key);
     }
 
-    public void addToContext(String key, Object value){
+    public void addToContext(String key, Object value) {
         context.put(key, value);
     }
 }

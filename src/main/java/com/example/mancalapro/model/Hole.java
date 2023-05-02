@@ -3,12 +3,11 @@ package com.example.mancalapro.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- - getNumberOfPieces(): Returns the number of stones in the hole.
- - pickUpStones(): Removes and returns all stones from the hole.
- - addStone(Stone stone): Adds a stone to the hole.
- - isEmpty(): Returns true if the hole is empty, and false otherwise.
+ * - getNumberOfPieces(): Returns the number of stones in the hole.
+ * - pickUpStones(): Removes and returns all stones from the hole.
+ * - addStone(Stone stone): Adds a stone to the hole.
+ * - isEmpty(): Returns true if the hole is empty, and false otherwise.
  */
 public class Hole {
     private List<Stone> stones;
@@ -33,9 +32,11 @@ public class Hole {
     public void addStone(Stone stone) {
         stones.add(stone);
     }
+
     public void addStones(List<Stone> newStones) {
         stones.addAll(newStones);
     }
+
     public Stone getLastStone() {
         return stones.isEmpty() ? null : stones.get(stones.size() - 1);
     }

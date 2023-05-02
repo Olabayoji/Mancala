@@ -1,4 +1,5 @@
 package com.example.mancalapro.model;
+
 public class LeaderBoardRow {
     private int ranking;
     private String username;
@@ -8,7 +9,8 @@ public class LeaderBoardRow {
     private double winPercentage;
     private boolean favorite;
 
-    public LeaderBoardRow(int ranking, String username, int totalMatches, int totalLosses, int totalWins, double winPercentage, boolean favorite) {
+    public LeaderBoardRow(int ranking, String username, int totalMatches, int totalLosses, int totalWins,
+            double winPercentage, boolean favorite) {
         this.ranking = ranking;
         this.username = username;
         this.totalMatches = totalMatches;

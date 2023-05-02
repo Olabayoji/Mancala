@@ -88,6 +88,7 @@ public class Database {
         }
         return false;
     }
+
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         allUsers.addAll(players);
@@ -149,7 +150,7 @@ public class Database {
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
                             userJsonObj.getString("password"));
-                            user.setApproved(userJsonObj.getBoolean("approved"));
+                    user.setApproved(userJsonObj.getBoolean("approved"));
 
                 } else {
                     continue;
@@ -265,6 +266,5 @@ public class Database {
 
         }
     }
-
 
 }

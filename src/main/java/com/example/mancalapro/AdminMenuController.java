@@ -78,7 +78,6 @@ public class AdminMenuController implements Initializable {
 
         });
 
-
         btnLogout.setOnMouseClicked(mouseEvent -> {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

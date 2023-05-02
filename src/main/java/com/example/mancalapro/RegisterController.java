@@ -45,7 +45,6 @@ public class RegisterController implements Initializable {
     @FXML
     private Button btnRegister;
 
-
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -89,7 +88,8 @@ public class RegisterController implements Initializable {
                 if (firstname.length() < 2 || username.length() < 3 || lastname.length() < 3) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("REGISTRATION ERROR");
-                    alert.setHeaderText("Username must be at least 3 characters, \nFirst name must be at least 2 characters\nLast name must be at least 2 characters");
+                    alert.setHeaderText(
+                            "Username must be at least 3 characters, \nFirst name must be at least 2 characters\nLast name must be at least 2 characters");
                     alert.showAndWait();
                     return;
                 }
@@ -131,7 +131,6 @@ public class RegisterController implements Initializable {
                     var contextManager = ContextManager.getInstance();
                     contextManager.addToContext("player", admin);
                 }
-
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScreen.fxml"));
                 root = loader.load();

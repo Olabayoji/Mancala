@@ -1,6 +1,5 @@
 package com.example.mancalapro;
 
-
 import com.example.mancalapro.model.Database;
 import com.example.mancalapro.model.DatabaseManager;
 import com.example.mancalapro.model.Player;
@@ -67,7 +66,7 @@ public class ProfileDialogueController {
         if (currentUser.getFavorite().contains(player)) {
             database.removeFavoritePlayer(currentUser, player);
         } else {
-            if (player.isPublicProfile()) { //if player is public, then add player
+            if (player.isPublicProfile()) { // if player is public, then add player
                 database.addFavoritePlayer(currentUser, player);
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

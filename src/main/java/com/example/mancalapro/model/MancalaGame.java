@@ -1,6 +1,5 @@
 package com.example.mancalapro.model;
 
-
 import java.util.List;
 import java.util.Random;
 
@@ -50,15 +49,16 @@ public class MancalaGame {
         int nextPlayerIndex = currentPlayerIndex == 0 ? 0 : 1;
 
         List<Stone> stones = hole.pickUpStones();
-//        System.out.println("total number of stones: " + stones.size());
+        // System.out.println("total number of stones: " + stones.size());
         int position = holeIndex;
         boolean extraTurn = false;
         boolean myStore = true;
 
         while (!stones.isEmpty()) {
             position = (position + 1) % (Board.HOLES_PER_ROW + 1);
-//            System.out.println("Postion: " + position + "No of stones: " + stones.size());
-//            System.out.println(stones.size());
+            // System.out.println("Postion: " + position + "No of stones: " +
+            // stones.size());
+            // System.out.println(stones.size());
 
             if (position == Board.HOLES_PER_ROW) {
                 if (myStore) {
@@ -66,7 +66,6 @@ public class MancalaGame {
                     board.addStoneToStore(currentPlayerIndex, stone);
                 }
                 myStore = !myStore;
-
 
                 side = (side + 1) % 2;
                 if (stones.isEmpty()) { // Check if it's the last stone
@@ -98,9 +97,8 @@ public class MancalaGame {
         return true;
     }
 
-
     public boolean isGameOver() {
-//        System.out.println("Game over called");
+        // System.out.println("Game over called");
         return board.isSideEmpty(0) || board.isSideEmpty(1);
     }
 

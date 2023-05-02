@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     String databasePath = "./src/main/gameData/database.json";
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         DatabaseManager.getDatabaseInstance().loadUsersFromJsonFile(databasePath);
@@ -21,15 +22,15 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-    //        setUpOnCloseHandling(primaryStage);
+        // setUpOnCloseHandling(primaryStage);
     }
 
-//    private void setUpOnCloseHandling(Stage primaryStage) {
-//        primaryStage.setOnCloseRequest(windowEvent -> {
-//            // Save the changes to the database before closing the application
-//            DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
-//        });
-//    }
+    // private void setUpOnCloseHandling(Stage primaryStage) {
+    // primaryStage.setOnCloseRequest(windowEvent -> {
+    // // Save the changes to the database before closing the application
+    // DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(databasePath);
+    // });
+    // }
 
     public static void main(String[] args) {
         Application.launch(args);

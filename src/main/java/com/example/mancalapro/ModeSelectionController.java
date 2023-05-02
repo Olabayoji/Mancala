@@ -40,7 +40,7 @@ public class ModeSelectionController implements Initializable {
     public AnchorPane rootPane;
 
     private Parent root;
-    private  Stage stage;
+    private Stage stage;
     private Scene scene;
 
     @Override
@@ -67,10 +67,9 @@ public class ModeSelectionController implements Initializable {
                 DatabaseManager.saveDatabaseInstance();
                 ContextManager contextManager = ContextManager.getInstance();
 
-
-                // Store the second player's username in ContextManager
+                // Store the game mode in ContextManager
+                contextManager.addToContext("mode", "AI");
                 contextManager.addToContext("secondPlayer", "Bot");
-
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassicScreen.fxml"));
                 root = loader.load();
@@ -86,6 +85,10 @@ public class ModeSelectionController implements Initializable {
         btnClassic.setOnMouseClicked(mouseEvent -> {
 
             try {
+                DatabaseManager.saveDatabaseInstance();
+                ContextManager contextManager = ContextManager.getInstance();
+                // Store the game mode in ContextManager
+                contextManager.addToContext("mode", "human");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiPlayerModal.fxml"));
                 Parent modalRoot = loader.load();
                 Stage modalStage = new Stage();
@@ -118,8 +121,6 @@ public class ModeSelectionController implements Initializable {
             }
 
         });
-
-
 
     }
 }

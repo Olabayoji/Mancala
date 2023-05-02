@@ -24,6 +24,7 @@ public class Stone {
     public void setType(Type type) {
         this.type = type;
     }
+
     public static Stone createSpecialStoneWithChance() {
         int randomValue = new Random().nextInt(10);
         if (randomValue < 3) {

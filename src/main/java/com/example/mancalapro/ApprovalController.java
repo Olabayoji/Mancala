@@ -78,7 +78,7 @@ public class ApprovalController implements Initializable {
                 lastNameLabel.setPrefWidth(100); // Set the preferred width of the label
                 lastNameLabel.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
 
-                Label access = new Label(player instanceof  Player ? "Player" : "Admin");
+                Label access = new Label(player instanceof Player ? "Player" : "Admin");
                 lastNameLabel.setMaxWidth(100); // Set the maximum width of the label
                 lastNameLabel.setPrefWidth(100); // Set the preferred width of the label
                 lastNameLabel.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
@@ -87,19 +87,20 @@ public class ApprovalController implements Initializable {
                 approveButton.setMaxWidth(100); // Set the maximum width of the label
                 approveButton.setPrefWidth(100); // Set the preferred width of the label
                 approveButton.setStyle("-fx-alignment: CENTER;"); // Center the text within the Label
-                hbox.getChildren().addAll(usernameLabel, firstNameLabel, lastNameLabel,access, approveButton);
+                hbox.getChildren().addAll(usernameLabel, firstNameLabel, lastNameLabel, access, approveButton);
                 unapprovedPlayersListView.getItems().add(hbox);
             }
         }
     }
-
 
     private Button createApproveButton(User player) {
         Button approveButton = new Button("Approve");
         approveButton.setOnAction(event -> {
             player.setApproved(true); // Update the approval status in the Player object
             Database.getInstance().editUser(player); // Update the approval status in the database
-            unapprovedPlayersListView.getItems().remove(((Node) event.getSource()).getParent()); // Remove the player's HBox from the ListView
+            unapprovedPlayersListView.getItems().remove(((Node) event.getSource()).getParent()); // Remove the player's
+                                                                                                 // HBox from the
+                                                                                                 // ListView
         });
         return approveButton;
     }

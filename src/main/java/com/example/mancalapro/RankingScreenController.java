@@ -127,7 +127,7 @@ public class RankingScreenController implements Initializable {
                     Player selectedPlayer = players.stream()
                             .filter(player -> player.getUserName().equals(rowData.getUsername())).findFirst()
                             .orElse(null);
-                    if (selectedPlayer.getUserName().equals(currentUser.getUserName())){
+                    if (selectedPlayer.getUserName().equals(currentUser.getUserName())) {
                         selectedPlayer = null;
                     }
                     if (selectedPlayer != null) {
@@ -142,7 +142,8 @@ public class RankingScreenController implements Initializable {
 
     private void showProfileDialog(Player selectedPlayer) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/mancalapro/PlayerProfileDialogue.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/mancalapro/PlayerProfileDialogue.fxml"));
             Parent root = loader.load();
 
             // Get the controller and set the player

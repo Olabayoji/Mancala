@@ -10,8 +10,8 @@ public class Player extends User {
     private List<Player> favorite;
     private Map<PowerUp, Integer> powerUps;
 
-
-    public Player(String firstName, String lastName, String userName, String profileImage, String password, boolean publicProfile) {
+    public Player(String firstName, String lastName, String userName, String profileImage, String password,
+            boolean publicProfile) {
         super(firstName, lastName, userName, profileImage, password);
         this.numberOfGames = 0;
         this.numberOfWins = 0;
@@ -22,7 +22,6 @@ public class Player extends User {
         powerUps.put(PowerUp.CONTINUE_TURN, 1);
         powerUps.put(PowerUp.DOUBLE_POINTS, 1);
     }
-
 
     public int getNumberOfGames() {
         return numberOfGames;
@@ -90,11 +89,13 @@ public class Player extends User {
         if (getNumberOfGames() == 0) {
             return 0;
         }
-        return (double) getNumberOfWins() / (double) getNumberOfGames();    }
+        return (double) getNumberOfWins() / (double) getNumberOfGames();
+    }
 
     public void removeFavorite(Player selectedPlayer) {
         favorite.remove(selectedPlayer);
     }
+
     public boolean usePowerUp(PowerUp powerUp) {
         int count = powerUps.getOrDefault(powerUp, 0);
         if (count > 0) {
