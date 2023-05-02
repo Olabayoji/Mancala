@@ -62,7 +62,7 @@ public class ModeSelectionController implements Initializable {
                 // Set up the modal stage
                 modalStage.initModality(Modality.APPLICATION_MODAL);
                 modalStage.initOwner(rootPane.getScene().getWindow());
-                modalStage.setTitle("Classic Mode (VS Human)");
+                modalStage.setTitle("Arcade Mode (VS Human)");
 
                 Scene modalScene = new Scene(modalRoot);
                 modalStage.setScene(modalScene);

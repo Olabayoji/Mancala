@@ -18,6 +18,7 @@ public class MancalaGame {
         currentPlayerIndex = new Random().nextInt(2);
         this.isArcadeMode = isArcadeMode;
         this.random = new Random();
+
     }
 
     public Board getBoard() {
@@ -28,17 +29,27 @@ public class MancalaGame {
         return players[currentPlayerIndex];
     }
 
-    public boolean usePowerUp(PowerUp powerUp) {
-        return getCurrentPlayer().usePowerUp(powerUp);
-    }
+
 
     public boolean move(int holeIndex, PowerUp powerUp, int side) {
-
+        if (powerUp != null){
+            System.out.println(powerUp.toString());
+        }
+        int position = holeIndex;
+        boolean extraTurn = false;
+        boolean myStore = true;
+        boolean doublePoint = false;
         holeIndex = holeIndex < 6 ? holeIndex : holeIndex - 7;
         // Handle power-ups before making the move
         if (isArcadeMode && powerUp != null) {
-            if (!usePowerUp(powerUp)) {
-                return false;
+            // Apply power-up effect
+            switch (powerUp) {
+                case CONTINUE_TURN:
+                    extraTurn = true;
+                    break;
+                case DOUBLE_POINTS:
+                    doublePoint = true;
+                    break;
             }
         }
 
@@ -50,9 +61,7 @@ public class MancalaGame {
 
         List<Stone> stones = hole.pickUpStones();
         // System.out.println("total number of stones: " + stones.size());
-        int position = holeIndex;
-        boolean extraTurn = false;
-        boolean myStore = true;
+
 
         while (!stones.isEmpty()) {
             position = (position + 1) % (Board.HOLES_PER_ROW + 1);
@@ -63,7 +72,8 @@ public class MancalaGame {
             if (position == Board.HOLES_PER_ROW) {
                 if (myStore) {
                     Stone stone = stones.remove(0);
-                    board.addStoneToStore(currentPlayerIndex, stone);
+
+                    board.addStoneToStore(currentPlayerIndex, stone, doublePoint);
                 }
                 myStore = !myStore;
 
@@ -82,17 +92,18 @@ public class MancalaGame {
                 }
 
                 // Handle special stones if in arcade mode
-                if (isArcadeMode && lastStone.getType() != Stone.Type.REGULAR) {
-                    handleSpecialStone(lastStone.getType(), currentPlayerIndex);
-                    // Remove the special stone after handling it
-                    nextHole.pickUpStones().remove(nextHole.getNumberOfPieces() - 1);
-                }
+//                if (isArcadeMode && lastStone.getType() != Stone.Type.REGULAR) {
+//                    handleSpecialStone(lastStone.getType(), currentPlayerIndex);
+//                    // Remove the special stone after handling it
+//                    nextHole.pickUpStones().remove(nextHole.getNumberOfPieces() - 1);
+//                }
             }
         }
 
         if (!extraTurn) {
             currentPlayerIndex = (currentPlayerIndex + 1) % 2;
         }
+        doublePoint = false;
 
         return true;
     }

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,9 @@ public class ClassicModeController implements Initializable {
     @FXML
     private Pane pit0, pit1, pit2, pit3, pit4, pit5, pit6, pit7, pit8, pit9, pit10, pit11, pit12, pit13;
     @FXML
+    private Button btnP1DoublePoint, btnP1ContinueTurn, btnP2ContinueTurn, btnP2DoublePoint;
+
+    @FXML
     private Text player1;
     @FXML
     private Text player2;
@@ -44,6 +48,11 @@ public class ClassicModeController implements Initializable {
     private MancalaGame game;
     private Label[] labels;
     private Pane[] pits;
+    private boolean isArcadeMode;
+    private Player p1;
+    private Player p2;
+    private boolean doublePointActivated = false;
+    private boolean continueTurnActivated = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,13 +60,16 @@ public class ClassicModeController implements Initializable {
         String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
         String secondPlayer = (String) ContextManager.getInstance().retrieveFromContext("secondPlayer");
         String mode = (String) ContextManager.getInstance().retrieveFromContext("mode");
+        String type = (String) ContextManager.getInstance().retrieveFromContext("type");
+
 
         // Retrieve the current user's instance from the Database through
         // DatabaseManager
-        Player p1 = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
-        Player p2 = mode.equals("human") ? (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer) : new Bot();
-
-        game = new MancalaGame(p1, p2, false); // false for classic mode
+        p1 = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
+        p2 = mode.equals("human") ? (Player) DatabaseManager.getDatabaseInstance().getUser(secondPlayer) : new Bot();
+        isArcadeMode = type.equalsIgnoreCase("arcade");
+        setupPowerUpButtons();
+        game = new MancalaGame(p1, p2, isArcadeMode); // false for classic mode
         player1.setText(p1.getUserName());
         player2.setText(p2.getUserName());
 
@@ -91,7 +103,14 @@ public class ClassicModeController implements Initializable {
                 continue; // Skip stores
             final int pitIndex = i;
             pits[i].setOnMouseClicked(event -> {
-                handlePlayerMove(pitIndex, p1, p2);
+                PowerUp selectedPowerUp = null;
+                if (isArcadeMode) {
+                    selectedPowerUp = doublePointActivated ? PowerUp.DOUBLE_POINTS : continueTurnActivated ? PowerUp.CONTINUE_TURN : null;
+                }
+                handlePlayerMove(pitIndex, selectedPowerUp, p1, p2);
+                //reset power up
+                doublePointActivated = false;
+                continueTurnActivated=false;
             });
 
         }
@@ -107,7 +126,7 @@ public class ClassicModeController implements Initializable {
 
     }
 
-    private void handlePlayerMove(int pitIndex, Player p1, Player p2) {
+    private void handlePlayerMove(int pitIndex, PowerUp powerUp, Player p1, Player p2) {
         if (!(game.getCurrentPlayer() instanceof Bot) && (pitIndex > 6 && game.getCurrentPlayer().equals(p1) || pitIndex < 6 && game.getCurrentPlayer().equals(p2))) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("INVALID MOVE");
@@ -115,8 +134,7 @@ public class ClassicModeController implements Initializable {
             alert.showAndWait();
             return;
         }
-        // Pass null for PowerUp in classic mode
-        game.move(pitIndex, null, game.getCurrentPlayer().equals(p1) ? 0 : 1);
+        game.move(pitIndex, powerUp, game.getCurrentPlayer().equals(p1) ? 0 : 1);
         updateUI(p1, p2);
         boolean gameOver = game.isGameOver();
 
@@ -127,9 +145,71 @@ public class ClassicModeController implements Initializable {
             showGameOverAlert(winner, p1, p2);
         } else if (game.getCurrentPlayer() instanceof Bot) {
             int botMove = ((Bot) game.getCurrentPlayer()).generateMove(game.getBoard());
-            handlePlayerMove(botMove, p1, p2);
+            handlePlayerMove(botMove, null, p1, p2);
         }
     }
+
+    private void setupPowerUpButtons() {
+        btnP1DoublePoint.setVisible(isArcadeMode);
+        btnP1ContinueTurn.setVisible(isArcadeMode);
+        btnP2DoublePoint.setVisible(isArcadeMode);
+        btnP2ContinueTurn.setVisible(isArcadeMode);
+
+        btnP1DoublePoint.setOnAction(event -> {
+            if (game.getCurrentPlayer().equals(p1)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Mancala Game");
+                alert.setHeaderText(null);
+                alert.setContentText(game.getCurrentPlayer().getUserName() + " Are you sure you want to use this power up? ");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    doublePointActivated = true;
+                    btnP1DoublePoint.setDisable(true);
+                }
+            }
+        });
+        btnP2DoublePoint.setOnAction(event -> {
+            if (game.getCurrentPlayer().equals(p2)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Mancala Game");
+                alert.setHeaderText(null);
+                alert.setContentText(game.getCurrentPlayer().getUserName() + " Are you sure you want to use this power up? ");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    doublePointActivated = true;
+                    btnP2DoublePoint.setDisable(true);
+                }
+            }
+        });
+        btnP2ContinueTurn.setOnAction(event -> {
+            if (game.getCurrentPlayer().equals(p2)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Mancala Game");
+                alert.setHeaderText(null);
+                alert.setContentText(game.getCurrentPlayer().getUserName() + " Are you sure you want to use this power up? ");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    continueTurnActivated = true;
+                    btnP2ContinueTurn.setDisable(true);
+                }
+            }
+        });
+        btnP1ContinueTurn.setOnAction(event -> {
+            if (game.getCurrentPlayer().equals(p1)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Mancala Game");
+                alert.setHeaderText(null);
+                alert.setContentText(game.getCurrentPlayer().getUserName() + " Are you sure you want to use this power up? ");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    doublePointActivated = true;
+                    btnP1ContinueTurn.setDisable(true);
+                }
+            }
+        });
+
+    }
+
 
     private void handleMainMenuClick(Player p1, Player p2, javafx.scene.input.MouseEvent mouseEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -148,11 +228,11 @@ public class ClassicModeController implements Initializable {
             stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             stage.close();
             String mode = (String) ContextManager.getInstance().retrieveFromContext("mode");
-          if (!mode.equals("human")){
-              scene = new Scene(root);
-              stage.setScene(scene);
-              stage.show();
-          }
+            if (!mode.equals("human")) {
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
         }
     }
 

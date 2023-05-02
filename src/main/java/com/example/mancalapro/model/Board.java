@@ -46,9 +46,12 @@ public class Board {
         return stores[playerIndex];
     }
 
-    public void addStoneToStore(int playerIndex, Stone stone) {
-        stores[playerIndex]++;
-    }
+    public void addStoneToStore(int playerIndex, Stone stone, boolean doublePointsMode) {
+        if (doublePointsMode) {
+            stores[playerIndex] += 2;
+        } else {
+            stores[playerIndex]++;
+        }    }
 
     public boolean isSideEmpty(int playerIndex) {
 

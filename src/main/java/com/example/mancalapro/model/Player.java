@@ -8,8 +8,6 @@ public class Player extends User {
     private int numberOfLosses;
     private boolean publicProfile;
     private List<Player> favorite;
-    private Map<PowerUp, Integer> powerUps;
-
     public Player(String firstName, String lastName, String userName, String profileImage, String password,
             boolean publicProfile) {
         super(firstName, lastName, userName, profileImage, password);
@@ -18,9 +16,7 @@ public class Player extends User {
         this.numberOfLosses = 0;
         this.favorite = new ArrayList<>();
         this.publicProfile = publicProfile;
-        powerUps = new HashMap<>();
-        powerUps.put(PowerUp.CONTINUE_TURN, 1);
-        powerUps.put(PowerUp.DOUBLE_POINTS, 1);
+
     }
 
     public int getNumberOfGames() {
@@ -69,13 +65,6 @@ public class Player extends User {
         this.numberOfLosses = numberOfLosses;
     }
 
-    public Map<PowerUp, Integer> getPowerUps() {
-        return powerUps;
-    }
-
-    public void setPowerUps(Map<PowerUp, Integer> powerUps) {
-        this.powerUps = powerUps;
-    }
 
     public List<Player> getFavorite() {
         return favorite;
@@ -96,14 +85,6 @@ public class Player extends User {
         favorite.remove(selectedPlayer);
     }
 
-    public boolean usePowerUp(PowerUp powerUp) {
-        int count = powerUps.getOrDefault(powerUp, 0);
-        if (count > 0) {
-            powerUps.put(powerUp, count - 1);
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public boolean equals(Object o) {
