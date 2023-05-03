@@ -20,6 +20,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * RulesArcadeController class handles the arcade rules screen of the Mancala
+ * game application.
+ * It allows the user to navigate back to the main menu or to the classic rules
+ * screen.
+ * This controller is associated with the RulesArcade.fxml file.
+ *
+ * @author Olabayoji Oladepo
+ */
 public class RulesArcadeController implements Initializable {
     @FXML
     private ImageView btnBack;
@@ -33,6 +42,7 @@ public class RulesArcadeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // back button action - navigates to the main menu screen
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
@@ -46,6 +56,8 @@ public class RulesArcadeController implements Initializable {
             }
 
         });
+
+        // classic button action - navigates to the classic rules screen
         btnClassic.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Rules.fxml"));

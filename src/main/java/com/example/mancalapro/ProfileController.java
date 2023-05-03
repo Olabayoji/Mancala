@@ -23,6 +23,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * ProfileController class handles the user profile interface of the Mancala
+ * game application.
+ * It displays user information, allows the user to change profile image and set
+ * privacy settings.
+ *
+ * @author Olabayoji Oladepo
+ */
 public class ProfileController implements Initializable {
     @FXML
     private ImageView btnBack;
@@ -55,6 +63,15 @@ public class ProfileController implements Initializable {
     @FXML
     private ImageView profileImage;
 
+    /**
+     * Returns the ranking of the given player among the given sorted list of
+     * players.
+     *
+     * @param player        The player whose ranking is to be determined.
+     * @param sortedPlayers The sorted list of players based on their win ratios.
+     * @return The ranking of the given player, or -1 if the player is not found in
+     *         the list.
+     */
     private int getPlayerRanking(Player player, List<Player> sortedPlayers) {
         for (int i = 0; i < sortedPlayers.size(); i++) {
             if (sortedPlayers.get(i).getUserName().equals(player.getUserName())) {
@@ -64,6 +81,12 @@ public class ProfileController implements Initializable {
         return -1;
     }
 
+    /**
+     * Updates the profile image of the given user with the specified new image URL.
+     *
+     * @param user        The user whose profile image is to be updated.
+     * @param newImageUrl The URL of the new profile image.
+     */
     public void updateProfileImage(User user, String newImageUrl) {
         User userToUpdate = Database.getInstance().getUser(user.getUserName());
 
@@ -124,7 +147,7 @@ public class ProfileController implements Initializable {
             }
         }
 
-        // System.out.println(user.getFirstName());
+        // Button action for going back to home screen
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader;
@@ -145,6 +168,7 @@ public class ProfileController implements Initializable {
 
         });
 
+        // Button action for toggling privacy mode
         btnPrivacy.setOnAction(event -> {
             Player player = (Player) user;
             player.setPublicProfile();
@@ -152,6 +176,7 @@ public class ProfileController implements Initializable {
             privacy.setText(privacyText);
         });
 
+        // Button action for changing image
         btnChangeImage.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Choose a Profile Image");

@@ -6,125 +6,142 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.MainMenuController">
-   <children>
-      <Group layoutX="541.0" layoutY="3.0">
-         <children>
-            <ImageView fitHeight="176.0" fitWidth="280.0" layoutX="-41.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/mancala-logo.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="62.0" fitWidth="234.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/mancala_text.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-      <HBox layoutX="985.0" layoutY="614.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="92.0" prefWidth="281.0" spacing="24.0">
-         <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
-               <children>
-                  <ImageView fx:id="btnProfile" fitHeight="47.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/profile.png" />
-                     </image>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PROFILE" textAlignment="CENTER">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
-               <children>
-                  <ImageView fx:id="btnRanking" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/leaderboard.png" />
-                     </image>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
-               <children>
-                  <ImageView fx:id="btnRules" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/rules.png" />
-                     </image>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RULES" textAlignment="CENTER">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox layoutX="57.0" layoutY="620.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="161.0" spacing="24.0">
-         <children>
-            <VBox fx:id="btnExit" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
-               <children>
-                  <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/quit.png" />
-                     </image>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EXIT">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <ImageView fx:id="btnLogout" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@assets/logout.png" />
-                           </image>
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.MainMenuController">
+    <children>
+        <Group layoutX="541.0" layoutY="3.0">
+            <children>
+                <ImageView fitHeight="176.0" fitWidth="280.0" layoutX="-41.0" layoutY="42.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@assets/mancala-logo.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="62.0" fitWidth="234.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@assets/mancala_text.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <HBox layoutX="985.0" layoutY="614.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              prefHeight="92.0" prefWidth="281.0" spacing="24.0">
+            <children>
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                      minWidth="-Infinity" spacing="4.0">
+                    <children>
+                        <ImageView fx:id="btnProfile" fitHeight="47.0" fitWidth="75.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/profile.png"/>
+                            </image>
                         </ImageView>
-                     </children>
-                  </HBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LOGOUT" textAlignment="CENTER">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <VBox alignment="CENTER" layoutX="334.0" layoutY="197.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-      <VBox alignment="CENTER" layoutX="547.0" layoutY="277.0" spacing="14.0">
-         <children>
-            <Pane fx:id="bgPlay" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="btnStartGame" fitHeight="181.0" fitWidth="161.0" layoutX="47.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/play.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Label text="START GAME">
-               <font>
-                  <Font name="Monospaced Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </children>
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PROFILE" textAlignment="CENTER">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                      minWidth="-Infinity" spacing="4.0">
+                    <children>
+                        <ImageView fx:id="btnRanking" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/leaderboard.png"/>
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                      minWidth="-Infinity" spacing="4.0">
+                    <children>
+                        <ImageView fx:id="btnRules" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/rules.png"/>
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RULES" textAlignment="CENTER">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox layoutX="57.0" layoutY="620.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="80.0" prefWidth="161.0" spacing="24.0">
+            <children>
+                <VBox fx:id="btnExit" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+                      minHeight="-Infinity" minWidth="-Infinity" spacing="4.0">
+                    <children>
+                        <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/quit.png"/>
+                            </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EXIT">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                      spacing="4.0">
+                    <children>
+                        <HBox alignment="CENTER">
+                            <children>
+                                <ImageView fx:id="btnLogout" fitHeight="47.0" fitWidth="47.0" pickOnBounds="true"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/logout.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LOGOUT" textAlignment="CENTER">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <VBox alignment="CENTER" layoutX="334.0" layoutY="197.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity"/>
+        <VBox alignment="CENTER" layoutX="547.0" layoutY="277.0" spacing="14.0">
+            <children>
+                <Pane fx:id="bgPlay" prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fx:id="btnStartGame" fitHeight="181.0" fitWidth="161.0" layoutX="47.0" layoutY="18.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/play.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+                <Label text="START GAME">
+                    <font>
+                        <Font name="Monospaced Bold" size="16.0"/>
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
 </AnchorPane>

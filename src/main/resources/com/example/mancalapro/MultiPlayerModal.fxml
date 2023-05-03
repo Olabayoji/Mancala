@@ -5,7 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="425.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.MultiPlayerModalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0"
+            prefWidth="425.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.MultiPlayerModalController">
     <children>
         <Group layoutX="74.0" layoutY="58.0">
             <children>
@@ -15,37 +17,42 @@
                             <children>
                                 <Label text="USERNAME">
                                     <font>
-                                        <Font name="Monospaced Bold" size="13.0" />
+                                        <Font name="Monospaced Bold" size="13.0"/>
                                     </font>
                                 </Label>
 
-                                <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="277.0" promptText="username" />
+                                <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="277.0"
+                                           promptText="username"/>
                             </children>
                         </VBox>
                         <VBox spacing="4.0">
                             <children>
                                 <Label text="PASSWORD">
                                     <font>
-                                        <Font name="Monospaced Bold" size="13.0" />
+                                        <Font name="Monospaced Bold" size="13.0"/>
                                     </font>
                                 </Label>
-                                <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="277.0" promptText="password" />
+                                <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="277.0"
+                                               promptText="password"/>
                             </children>
                         </VBox>
                     </children>
                 </VBox>
-                <Button fx:id="btnAdd" layoutX="3.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="272.0" text="Add">
+                <Button fx:id="btnAdd" layoutX="3.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0"
+                        prefWidth="272.0" text="Add">
                     <font>
-                        <Font name="Monospaced Bold" size="16.0" />
+                        <Font name="Monospaced Bold" size="16.0"/>
                     </font>
                 </Button>
-                <Text fx:id="txErrorMsg" layoutX="1.0" layoutY="121.431640625" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="273.0" />
+                <Text fx:id="txErrorMsg" layoutX="1.0" layoutY="121.431640625" strokeType="OUTSIDE" strokeWidth="0.0"
+                      wrappingWidth="273.0"/>
             </children>
         </Group>
-      <Text layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Second Player" textAlignment="CENTER" wrappingWidth="425.0">
-         <font>
-            <Font name="Monospaced Bold" size="13.0" />
-         </font>
-      </Text>
+        <Text layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Second Player" textAlignment="CENTER"
+              wrappingWidth="425.0">
+            <font>
+                <Font name="Monospaced Bold" size="13.0"/>
+            </font>
+        </Text>
     </children>
 </AnchorPane>

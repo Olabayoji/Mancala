@@ -3,16 +3,10 @@ package com.example.mancalapro.model;
 import java.util.List;
 
 /**
- * - getHole(int row, int col): Returns the hole at the specified row and
- * column.
- * - getStore(int playerIndex): Returns the number of stones in the specified
- * player's store.
- * - addStoneToStore(int playerIndex, Stone stone): Adds a stone to the
- * specified player's store.
- * - isSideEmpty(int playerIndex): Returns true if all holes on the specified
- * player's side are empty, and false otherwise.
- * - collectRemainingStones(int playerIndex): Collects the remaining stones from
- * the specified player's side and adds them to their store.
+ * Represents the game board in the Mancala Pro application.
+ * Handles the game board setup, stones, and player stores.
+ * 
+ * @author Olabayoji Oladepo
  */
 public class Board {
     public static final int ROWS = 2;
@@ -51,7 +45,8 @@ public class Board {
             stores[playerIndex] += 2;
         } else {
             stores[playerIndex]++;
-        }    }
+        }
+    }
 
     public boolean isSideEmpty(int playerIndex) {
 

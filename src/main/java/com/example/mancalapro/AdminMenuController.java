@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -18,7 +17,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-// comment
+/**
+ * Controller for the admin menu screen in the Mancala game application.
+ * 
+ * @author Olabayoji Oladepo
+ */
 public class AdminMenuController implements Initializable {
 
     @FXML
@@ -37,13 +40,25 @@ public class AdminMenuController implements Initializable {
     private Scene scene;
     private String username;
 
+    /**
+     * Sets the username for the admin.
+     * 
+     * @param username The admin's username.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Initializes the controller class.
+     * 
+     * @param location  The location used to resolve relative paths for the root
+     *                  object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // Handle approval button click event
         btnApproval.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Approval.fxml"));
@@ -60,6 +75,8 @@ public class AdminMenuController implements Initializable {
             }
 
         });
+
+        // Handle profile button click event
         btnProfile.setOnMouseClicked(mouseEvent -> {
             try {
                 // Thread.sleep(2000);
@@ -78,6 +95,7 @@ public class AdminMenuController implements Initializable {
 
         });
 
+        // Handle logout button click event
         btnLogout.setOnMouseClicked(mouseEvent -> {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -98,6 +116,7 @@ public class AdminMenuController implements Initializable {
             }
         });
 
+        // Handle exit button click event
         btnExit.setOnMouseClicked(mouseEvent -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Mancala Game");

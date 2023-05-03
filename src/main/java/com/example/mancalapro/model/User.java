@@ -1,7 +1,14 @@
 package com.example.mancalapro.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
+/**
+ * Represents a user in the Mancala Pro application.
+ * Stores user information such as name, username, profile image, and login
+ * details.
+ * 
+ * @author Olabayoji Oladepo
+ */
 
 public class User {
     protected String firstName;
@@ -14,6 +21,16 @@ public class User {
     protected String password;
     protected boolean approved;
 
+    /**
+     * Constructs a new user with the given information.
+     * 
+     * @param firstName    The first name of the user.
+     * @param lastName     The last name of the user.
+     * @param userName     The username of the user.
+     * @param profileImage The profile image of the user.
+     * @param password     The password of the user.
+     */
+
     public User(String firstName, String lastName, String userName, String profileImage, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,6 +41,8 @@ public class User {
         this.password = password;
         this.approved = false;
     }
+
+    // Getters and setters
 
     public String getPassword() {
         return password;
@@ -73,10 +92,6 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
-    public void updateLastLogin() {
-        this.lastLogin = LocalDateTime.now();
-    }
-
     public String getProfileImage() {
         return profileImage;
     }
@@ -91,5 +106,12 @@ public class User {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    /**
+     * Updates the user's last login to the current date and time.
+     */
+    public void updateLastLogin() {
+        this.lastLogin = LocalDateTime.now();
     }
 }

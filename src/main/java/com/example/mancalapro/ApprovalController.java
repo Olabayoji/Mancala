@@ -22,6 +22,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for the approval screen in the Mancala game application.
+ *
+ * @author Olabayoji Oladepo
+ */
 public class ApprovalController implements Initializable {
     @FXML
     private ImageView btnBack;
@@ -36,8 +41,17 @@ public class ApprovalController implements Initializable {
     private Stage stage;
     private Scene scene;
 
+    /**
+     * Initializes the controller class.
+     *
+     * @param location  The location used to resolve relative paths for the root
+     *                  object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Handle back button click event
+
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMenu.fxml"));
@@ -93,6 +107,12 @@ public class ApprovalController implements Initializable {
         }
     }
 
+    /**
+     * Creates an "Approve" button for the specified player.
+     *
+     * @param player The player to be approved.
+     * @return The "Approve" button.
+     */
     private Button createApproveButton(User player) {
         Button approveButton = new Button("Approve");
         approveButton.setOnAction(event -> {

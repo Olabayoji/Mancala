@@ -6,36 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ProfileController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ProfileController">
     <children>
-        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="btnBack" fitHeight="44.0" fitWidth="55.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true"
+                   preserveRatio="true">
             <image>
-                <Image url="@assets/back-arrow.png" />
+                <Image url="@assets/back-arrow.png"/>
             </image>
             <cursor>
-                <Cursor fx:constant="HAND" />
+                <Cursor fx:constant="HAND"/>
             </cursor>
         </ImageView>
         <Text layoutX="552.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROFILE">
             <font>
-                <Font name="Monospaced Bold" size="36.0" />
+                <Font name="Monospaced Bold" size="36.0"/>
             </font>
         </Text>
         <VBox alignment="CENTER" layoutX="562.0" layoutY="96.0" spacing="8.0">
             <children>
-                <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image">
+                <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                           preserveRatio="true" styleClass="profile-image">
                     <image>
-                        <Image url="@assets/profile-icon.png" />
+                        <Image url="@assets/profile-icon.png"/>
                     </image>
                 </ImageView>
                 <Button fx:id="btnChangeImage" mnemonicParsing="false" text="Change Image">
                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
+                        <Font name="Monospaced Regular" size="13.0"/>
                     </font>
                 </Button>
                 <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
+                        <Font name="Monospaced Bold" size="13.0"/>
                     </font>
                 </Text>
             </children>
@@ -44,12 +48,12 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FIRST NAME">
                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
+                        <Font name="Monospaced Bold" size="13.0"/>
                     </font>
                 </Text>
                 <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin ">
                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
+                        <Font name="Monospaced Regular" size="13.0"/>
                     </font>
                 </Text>
             </children>
@@ -58,12 +62,12 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LAST NAME">
                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
+                        <Font name="Monospaced Bold" size="13.0"/>
                     </font>
                 </Text>
                 <Text fx:id="lastName" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin ">
                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
+                        <Font name="Monospaced Regular" size="13.0"/>
                     </font>
                 </Text>
             </children>
@@ -74,12 +78,12 @@
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RANKING: ">
                             <font>
-                                <Font name="Monospaced Bold" size="13.0" />
+                                <Font name="Monospaced Bold" size="13.0"/>
                             </font>
                         </Text>
                         <Text fx:id="ranking" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                             <font>
-                                <Font name="Monospaced Regular" size="13.0" />
+                                <Font name="Monospaced Regular" size="13.0"/>
                             </font>
                         </Text>
                     </children>
@@ -88,12 +92,12 @@
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL MATCHES:">
                             <font>
-                                <Font name="Monospaced Bold" size="13.0" />
+                                <Font name="Monospaced Bold" size="13.0"/>
                             </font>
                         </Text>
                         <Text fx:id="numberOfGames" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                             <font>
-                                <Font name="Monospaced Regular" size="13.0" />
+                                <Font name="Monospaced Regular" size="13.0"/>
                             </font>
                         </Text>
                     </children>
@@ -102,12 +106,12 @@
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL WINS:">
                             <font>
-                                <Font name="Monospaced Bold" size="13.0" />
+                                <Font name="Monospaced Bold" size="13.0"/>
                             </font>
                         </Text>
                         <Text fx:id="numberOfWins" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                             <font>
-                                <Font name="Monospaced Regular" size="13.0" />
+                                <Font name="Monospaced Regular" size="13.0"/>
                             </font>
                         </Text>
                     </children>
@@ -116,12 +120,12 @@
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WIN %:">
                             <font>
-                                <Font name="Monospaced Bold" size="13.0" />
+                                <Font name="Monospaced Bold" size="13.0"/>
                             </font>
                         </Text>
                         <Text fx:id="winRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
                             <font>
-                                <Font name="Monospaced Regular" size="13.0" />
+                                <Font name="Monospaced Regular" size="13.0"/>
                             </font>
                         </Text>
                     </children>
@@ -130,30 +134,31 @@
                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LAST LOGIN:">
                             <font>
-                                <Font name="Monospaced Bold" size="13.0" />
+                                <Font name="Monospaced Bold" size="13.0"/>
                             </font>
                         </Text>
-                        <Text fx:id="lastLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="01" />
+                        <Text fx:id="lastLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="01"/>
                     </children>
                 </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" spacing="4.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Privacy:">
-                     <font>
-                        <Font name="Monospaced Bold" size="13.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="privacy" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
-                     <font>
-                        <Font name="Monospaced Regular" size="13.0" />
-                     </font></Text>
-                  <Button fx:id="btnPrivacy" mnemonicParsing="false" text="Change Privacy" />
-               </children>
-            </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" spacing="4.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Privacy:">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Text>
+                        <Text fx:id="privacy" strokeType="OUTSIDE" strokeWidth="0.0" text="01">
+                            <font>
+                                <Font name="Monospaced Regular" size="13.0"/>
+                            </font>
+                        </Text>
+                        <Button fx:id="btnPrivacy" mnemonicParsing="false" text="Change Privacy"/>
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>
     <cursor>
-        <Cursor fx:constant="HAND" />
+        <Cursor fx:constant="HAND"/>
     </cursor>
 </AnchorPane>

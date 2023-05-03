@@ -27,6 +27,13 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * RankingScreenController class handles the ranking screen of the Mancala game
+ * application.
+ * It displays the leaderboard with players ranked by their win ratio.
+ *
+ * @author Olabayoji Oladepo
+ */
 public class RankingScreenController implements Initializable {
     @FXML
     private ImageView btnBack;
@@ -47,11 +54,19 @@ public class RankingScreenController implements Initializable {
     @FXML
     private TableColumn<LeaderBoardRow, Boolean> favoriteColumn;
 
+    /**
+     * Initializes the controller class.
+     * 
+     * @param location  The location used to resolve relative paths for the root
+     *                  object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTableColumns();
         loadLeaderboardData();
 
+        // Navigate back to the main menu
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
@@ -66,6 +81,9 @@ public class RankingScreenController implements Initializable {
         });
     }
 
+    /**
+     * Initializes the table columns for the leaderboard.
+     */
     private void initTableColumns() {
         rankingColumn.setCellValueFactory(new PropertyValueFactory<>("ranking"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -76,6 +94,9 @@ public class RankingScreenController implements Initializable {
         favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("favorite"));
     }
 
+    /**
+     * Loads and displays the leaderboard data.
+     */
     private void loadLeaderboardData() {
         Database database = DatabaseManager.getDatabaseInstance();
         List<Player> players = database.getPlayersSortedByWinRatio();
@@ -102,7 +123,7 @@ public class RankingScreenController implements Initializable {
 
         leaderboardTable.setItems(playerRows);
 
-        // Add event handler for row selection
+        // Event handler for row selection
         leaderboardTable.setRowFactory(tv -> {
             String currentUsername = (String) ContextManager.getInstance().retrieveFromContext("currentUser");
             Player currentUser = (Player) DatabaseManager.getDatabaseInstance().getUser(currentUsername);
@@ -140,6 +161,11 @@ public class RankingScreenController implements Initializable {
         });
     }
 
+    /**
+     * Shows the profile dialog for the selected player.
+     *
+     * @param selectedPlayer The selected player whose profile will be displayed.
+     */
     private void showProfileDialog(Player selectedPlayer) {
         try {
             FXMLLoader loader = new FXMLLoader(

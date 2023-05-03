@@ -19,7 +19,14 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-// comment 
+/**
+ * MainMenuController class handles the main menu interface of the Mancala game
+ * application.
+ * It manages button actions for starting a game, viewing rules, profile,
+ * ranking, logout, and exit.
+ *
+ * @author Olabayoji Oladepo
+ */
 public class MainMenuController implements Initializable {
     @FXML
     private ImageView btnStartGame;
@@ -36,18 +43,21 @@ public class MainMenuController implements Initializable {
     @FXML
     private VBox btnExit;
 
+    private static final String DATABASE_PATH = "./src/main/gameData/database.json";
     private Parent root;
     private Stage stage;
     private Scene scene;
-    private String username;
-    final String DATABASEPATH = "./src/main/gameData/database.json";
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    /**
+     * Initializes the MainMenuController and sets up the button actions.
+     *
+     * @param location  the location used to resolve relative paths for the root
+     *                  object
+     * @param resources the resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Start Game button action
         btnStartGame.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ModeSelection.fxml"));
@@ -61,6 +71,7 @@ public class MainMenuController implements Initializable {
             }
 
         });
+        // Rules button action
         btnRules.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Rules.fxml"));
@@ -77,6 +88,8 @@ public class MainMenuController implements Initializable {
             }
 
         });
+
+        // Profile button action
         btnProfile.setOnMouseClicked(mouseEvent -> {
             try {
                 // Thread.sleep(2000);
@@ -94,6 +107,8 @@ public class MainMenuController implements Initializable {
             }
 
         });
+
+        // Ranking button action
         btnRanking.setOnMouseClicked(mouseEvent -> {
             try {
                 // Thread.sleep(2000);
@@ -112,6 +127,7 @@ public class MainMenuController implements Initializable {
 
         });
 
+        // Logout button action
         btnLogout.setOnMouseClicked(mouseEvent -> {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -120,7 +136,7 @@ public class MainMenuController implements Initializable {
                 alert.setContentText("Are you sure you want to logout?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(DATABASEPATH);
+                    DatabaseManager.getDatabaseInstance().saveUsersToJsonFile(DATABASE_PATH);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScreen.fxml"));
                     root = loader.load();
