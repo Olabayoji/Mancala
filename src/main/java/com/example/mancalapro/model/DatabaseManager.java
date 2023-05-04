@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Manages the database instance, handling its creation and saving.
  * 
- * @author Olabayoji Oladepo
+ * @author Oluwatobi Gbemile
  */
 public class DatabaseManager {
     private static final String DATABASE_FILE = "./src/main/gameData/database.json";

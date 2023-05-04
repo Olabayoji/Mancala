@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Represents a stone in the Mancala Pro application with various types.
  *
- * @author Olabayoji Oladepo
+ * @author Daisy Morrison
  */
 public class Stone {
 

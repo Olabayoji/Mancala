@@ -39,7 +39,7 @@ public class RulesController implements Initializable {
      * screen.
      * This controller is associated with the Rules.fxml file.
      *
-     * @author Olabayoji Oladepo
+     * @author Daisy Morrison
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

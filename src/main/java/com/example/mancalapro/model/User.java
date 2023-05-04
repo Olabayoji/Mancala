@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Stores user information such as name, username, profile image, and login
  * details.
  * 
- * @author Olabayoji Oladepo
+ * @author • Salieu Kamara
  */
 
 public class User {

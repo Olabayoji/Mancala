@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
  * screen.
  * This controller is associated with the RulesArcade.fxml file.
  *
- * @author Olabayoji Oladepo
+ * @author Sailaja Bonu
  */
 public class RulesArcadeController implements Initializable {
     @FXML

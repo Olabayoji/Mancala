@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents a hole in the Mancala Pro game board containing stones.
  *
- * @author Olabayoji Oladepo
+ * @author Zarana Lathiya
  */
 public class Hole {
     private List<Stone> stones;
