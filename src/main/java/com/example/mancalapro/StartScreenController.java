@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
  * It handles user login and registration, and directs users to either the main
  * menu for players or the admin menu for administrators.
  * 
- * @author Olabayoji Oladepo
+ * @author • Salieu Kamara
  */
 public class StartScreenController implements Initializable {
     private static final String DATABASE_FILE = "./src/main/gameData/database.json";
