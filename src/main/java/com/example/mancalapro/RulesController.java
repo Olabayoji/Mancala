@@ -32,8 +32,18 @@ public class RulesController implements Initializable {
     private Stage stage;
     private Scene scene;
 
+    /**
+     * RulesController class handles the classic rules screen of the Mancala
+     * game application.
+     * It allows the user to navigate back to the main menu or to the arcade rules
+     * screen.
+     * This controller is associated with the Rules.fxml file.
+     *
+     * @author Daisy Morrison
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // back button action - navigates to the main screen
         btnBack.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
@@ -47,6 +57,9 @@ public class RulesController implements Initializable {
             }
 
         });
+
+        // arcade button action - navigates to the arcade rules screen
+
         btnArcade.setOnMouseClicked(mouseEvent -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("RulesArcade.fxml"));

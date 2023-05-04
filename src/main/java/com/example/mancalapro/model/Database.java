@@ -2,29 +2,38 @@ package com.example.mancalapro.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
+/**
+ * Manages a database of players and admins.
+ * 
+ * @author Olabayoji Oladepo
+ */
 public class Database {
+    private static final String DATABASE_FILE = "./src/main/gameData/database.json";
+    private static Database instance;
+
     private List<Player> players;
     private List<Admin> admins;
 
-    private static Database instance;
-    private static final String DATABASE_FILE = "./src/main/gameData/database.json";
-
+    /**
+     * Constructs a Database object.
+     */
     private Database() {
         this.players = new ArrayList<>();
         this.admins = new ArrayList<>();
     }
 
+    /**
+     * Returns the singleton instance of Database.
+     * 
+     * @return The instance of Database.
+     */
     public static Database getInstance() {
         if (instance == null) {
             instance = new Database();
@@ -33,6 +42,14 @@ public class Database {
     }
 
     // Getters, setters
+
+    /**
+     * Adds a user to the database.
+     * 
+     * @param user The user to add.
+     * @return true if the user was added successfully, false if the username is a
+     *         duplicate.
+     */
     public boolean addUser(User user) {
 
         for (Player existingPlayer : players) {
@@ -54,6 +71,12 @@ public class Database {
         return true; // User added successfully
     }
 
+    /**
+     * Gets a user from the database by username.
+     * 
+     * @param userName The username of the user to get.
+     * @return The User object if found, or null if not found.
+     */
     public User getUser(String userName) {
         for (Player player : players) {
             if (player.userName.equals(userName)) {
@@ -68,6 +91,12 @@ public class Database {
         return null;
     }
 
+    /**
+     * Deletes a user from the database by username.
+     * 
+     * @param userName The username of the user to delete.
+     * @return true if the user was deleted, false if the user was not found.
+     */
     public boolean deleteUser(String userName) {
         User userToRemove = getUser(userName);
         if (userToRemove != null) {
@@ -81,6 +110,12 @@ public class Database {
         return false;
     }
 
+    /**
+     * Modifies a user from the database by username.
+     * 
+     * @param userName The username of the user to edit.
+     * @return true if the user was edited, false if the user was not found.
+     */
     public boolean editUser(User user) {
         User userToEdit = getUser(user.userName);
         if (userToEdit != null) {
@@ -90,6 +125,11 @@ public class Database {
         }
         return false;
     }
+
+    /**
+     * Gets all users from the database by username.
+     * 
+     */
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         allUsers.addAll(players);
@@ -111,6 +151,21 @@ public class Database {
         return sortedPlayers;
     }
 
+    public boolean updateUser(Player player) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getUserName().equals(player.getUserName())) {
+                players.set(i, player);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Loads users from a JSON file into the database.
+     * 
+     * @param filePath The path of the JSON file.
+     */
     public void loadUsersFromJsonFile(String filePath) {
         try {
             String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -131,6 +186,7 @@ public class Database {
                             userJsonObj.getString("password"),
                             userJsonObj.getBoolean("publicProfile"));
                     ((Player) user).setNumberOfGames(userJsonObj.getInt("numberOfGames"));
+                    ((Player) user).setNumberOfLosses(userJsonObj.getInt("numberOfLosses"));
                     ((Player) user).setNumberOfWins(userJsonObj.getInt("numberOfWins"));
                     user.setApproved(userJsonObj.getBoolean("approved"));
                 } else if ("admin".equals(type)) {
@@ -140,7 +196,7 @@ public class Database {
                             userJsonObj.getString("userName"),
                             userJsonObj.getString("profileImage"),
                             userJsonObj.getString("password"));
-                            user.setApproved(userJsonObj.getBoolean("approved"));
+                    user.setApproved(userJsonObj.getBoolean("approved"));
 
                 } else {
                     continue;
@@ -180,6 +236,11 @@ public class Database {
         }
     }
 
+    /**
+     * Saves users to a JSON file.
+     * 
+     * @param filePath The path of the JSON file.
+     */
     public void saveUsersToJsonFile(String filePath) {
         JSONArray usersJsonArray = new JSONArray();
 
@@ -203,13 +264,18 @@ public class Database {
                 userJsonObj.put("type", "player");
                 userJsonObj.put("numberOfGames", player.getNumberOfGames());
                 userJsonObj.put("numberOfWins", player.getNumberOfWins());
+                userJsonObj.put("numberOfLosses", player.getNumberOfLosses());
                 userJsonObj.put("favorite", player.getFavorite());
                 userJsonObj.put("publicProfile", player.isPublicProfile());
 
                 // Save favorite players
                 JSONArray favoriteJsonArray = new JSONArray();
+                Set<String> favoriteUsernames = new HashSet<>(); // Use a Set to store unique favorite player usernames
                 for (Player favoritePlayer : player.getFavorite()) {
-                    favoriteJsonArray.put(favoritePlayer.getUserName());
+                    favoriteUsernames.add(favoritePlayer.getUserName());
+                }
+                for (String favoriteUsername : favoriteUsernames) {
+                    favoriteJsonArray.put(favoriteUsername);
                 }
                 userJsonObj.put("favorite", favoriteJsonArray);
 
@@ -227,6 +293,12 @@ public class Database {
         }
     }
 
+    /**
+     * Adds a player to the current user's list of favorite players.
+     * 
+     * @param currentUser    The current user.
+     * @param favoritePlayer The player to add to the list of favorite players.
+     */
     public void addFavoritePlayer(Player currentUser, Player favoritePlayer) {
         Player userInDatabase = (Player) getUser(currentUser.getUserName());
         if (userInDatabase != null) {
@@ -235,6 +307,12 @@ public class Database {
         }
     }
 
+    /**
+     * Removes a player from the current user's list of favorite players.
+     * 
+     * @param currentUser    The current user.
+     * @param favoritePlayer The player to remove from the list of favorite players.
+     */
     public void removeFavoritePlayer(Player currentUser, Player favoritePlayer) {
         Player userInDatabase = (Player) getUser(currentUser.getUserName());
         if (userInDatabase != null) {
@@ -243,6 +321,12 @@ public class Database {
         }
     }
 
+    /**
+     * Updates the profile image of a user.
+     * 
+     * @param user        The user whose profile image will be updated.
+     * @param newImageUrl The new URL of the profile image.
+     */
     public void updateProfileImage(User user, String newImageUrl) {
         User userToUpdate = Database.getInstance().getUser(user.getUserName());
 
@@ -251,6 +335,5 @@ public class Database {
 
         }
     }
-
 
 }

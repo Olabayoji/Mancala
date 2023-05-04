@@ -1,4 +1,12 @@
 package com.example.mancalapro.model;
+
+/**
+ * Represents a row in the leader board of the Mancala Pro application.
+ * Stores user information such as ranking, username, total matches, wins, and
+ * losses.
+ * 
+ * @author Olabayoji Oladepo
+ */
 public class LeaderBoardRow {
     private int ranking;
     private String username;
@@ -8,7 +16,19 @@ public class LeaderBoardRow {
     private double winPercentage;
     private boolean favorite;
 
-    public LeaderBoardRow(int ranking, String username, int totalMatches, int totalLosses, int totalWins, double winPercentage, boolean favorite) {
+    /**
+     * Constructs a new LeaderBoardRow with the given information.
+     * 
+     * @param ranking       The ranking of the player.
+     * @param username      The username of the player.
+     * @param totalMatches  The total number of matches played by the player.
+     * @param totalLosses   The total number of matches lost by the player.
+     * @param totalWins     The total number of matches won by the player.
+     * @param winPercentage The win percentage of the player.
+     * @param favorite      Indicates if the player is a favorite.
+     */
+    public LeaderBoardRow(int ranking, String username, int totalMatches, int totalLosses, int totalWins,
+            double winPercentage, boolean favorite) {
         this.ranking = ranking;
         this.username = username;
         this.totalMatches = totalMatches;
@@ -18,6 +38,7 @@ public class LeaderBoardRow {
         this.favorite = favorite;
     }
 
+    // setter and getter
     public int getRanking() {
         return ranking;
     }

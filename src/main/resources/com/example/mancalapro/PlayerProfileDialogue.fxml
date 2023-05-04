@@ -8,36 +8,38 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ProfileDialogueController">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ProfileDialogueController">
     <children>
-      <VBox alignment="CENTER" layoutX="130.0" layoutY="14.0" spacing="36.0">
-         <children>
-            <VBox alignment="CENTER" spacing="6.0">
-               <children>
-                      <ImageView fx:id="playerProfileImage" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@assets/profile-icon.png" />
-                          </image>
-                      </ImageView>
-                      <Label fx:id="playerNameLabel" text="Player Name">
-                          <font>
-                              <Font name="Monospaced Bold" size="13.0" />
-                          </font>
-                      </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" spacing="8.0">
-               <children>
-                      <Label fx:id="winPercentageLabel" text="Win Percentage: 0%">
-                          <font>
-                              <Font name="Monospaced Bold" size="13.0" />
-                          </font>
-                      </Label>
-                      <Button fx:id="favoriteButton" text="Add to favorites" />
-                      <Button fx:id="closeButton" text="Close" />
-               </children>
-            </VBox>
-         </children>
-      </VBox>
+        <VBox alignment="CENTER" layoutX="130.0" layoutY="14.0" spacing="36.0">
+            <children>
+                <VBox alignment="CENTER" spacing="6.0">
+                    <children>
+                        <ImageView fx:id="playerProfileImage" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/profile-icon.png"/>
+                            </image>
+                        </ImageView>
+                        <Label fx:id="playerNameLabel" text="Player Name">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" spacing="8.0">
+                    <children>
+                        <Label fx:id="winPercentageLabel" text="Win Percentage: 0%">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="favoriteButton" text="Add to favorites"/>
+                        <Button fx:id="closeButton" text="Close"/>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

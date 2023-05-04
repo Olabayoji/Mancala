@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/19"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.ClassicModeController">
     <children>
-        <Text layoutX="11.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLASSIC MODE"
+        <Text layoutX="11.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ARCADE MODE"
               textAlignment="CENTER" wrappingWidth="1278.1353759765625">
             <font>
                 <Font name="Monospaced Bold" size="36.0"/>
@@ -30,6 +25,20 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </ImageView>
+        <HBox layoutX="922.0" layoutY="621.0" spacing="24.0">
+            <children>
+                <Button fx:id="btnP2DoublePoint" mnemonicParsing="false" text="Double Point">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnP2ContinueTurn" mnemonicParsing="false" text="Continue Turn">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Button>
+            </children>
+        </HBox>
         <HBox fx:id="board" alignment="CENTER" layoutX="111.0" layoutY="202.0" spacing="24.0">
             <children>
                 <Pane prefHeight="304.0" prefWidth="121.0" styleClass="section">
@@ -207,18 +216,46 @@
                 </Pane>
             </children>
         </HBox>
-        <Text layoutX="109.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 1"
+        <Text fx:id="player1" layoutX="109.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 1"
               textAlignment="CENTER" wrappingWidth="1065.0">
             <font>
                 <Font name="Monospaced Bold" size="24.0"/>
             </font>
         </Text>
-        <Text layoutX="110.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 2"
+        <Text fx:id="player2" layoutX="110.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER 2"
               textAlignment="CENTER" wrappingWidth="1065.0">
             <font>
                 <Font name="Monospaced Bold" size="24.0"/>
             </font>
         </Text>
+        <HBox layoutX="922.0" layoutY="121.0" spacing="24.0">
+            <children>
+                <Button fx:id="btnP1DoublePoint" mnemonicParsing="false" text="Double Point">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnP1ContinueTurn" mnemonicParsing="false" text="Continue Turn">
+                    <font>
+                        <Font name="Monospaced Bold" size="13.0"/>
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="111.0" layoutY="67.0" spacing="4.0">
+            <children>
+                <Label text="Turn:">
+                    <font>
+                        <Font name="Monospaced Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <Text fx:id="playerTurn" strokeType="OUTSIDE" strokeWidth="0.0">
+                    <font>
+                        <Font name="Monospaced Bold" size="16.0"/>
+                    </font>
+                </Text>
+            </children>
+        </HBox>
     </children>
     <cursor>
         <Cursor fx:constant="HAND"/>

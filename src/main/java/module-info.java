@@ -8,7 +8,8 @@ module com.example.mancalapro {
     requires org.kordamp.ikonli.javafx;
     requires com.almasb.fxgl.all;
     requires org.json;
-    opens com.example.mancalapro to javafx.fxml, org.json;
+    requires jbcrypt;
+    opens com.example.mancalapro to javafx.fxml, org.json, org.mindrot;
     exports com.example.mancalapro;
     exports com.example.mancalapro.model;
 }

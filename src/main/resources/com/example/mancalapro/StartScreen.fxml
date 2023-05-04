@@ -6,69 +6,78 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.StartScreenController">
-   
-         <children>
-      <VBox alignment="CENTER" layoutX="534.0" layoutY="25.0" spacing="40.0">
-         <children>
-             <Group>
-               <children>
-                  <ImageView fitHeight="176.0" fitWidth="280.0" layoutX="-41.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/mancala-logo.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="62.0" fitWidth="234.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/mancala_text.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Group>
-            <Group>
-               <children>
-                  <VBox spacing="12.0">
-                     <children>
-                        <VBox spacing="4.0">
-                           <children>
-                              <Label text="USERNAME">
-                                 <font>
-                                    <Font name="Monospaced Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                        
-                                                      <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="277.0" promptText="username" />
-                           </children>
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mancalapro.StartScreenController">
+
+    <children>
+        <VBox alignment="CENTER" layoutX="534.0" layoutY="25.0" spacing="40.0">
+            <children>
+                <Group>
+                    <children>
+                        <ImageView fitHeight="176.0" fitWidth="280.0" layoutX="-41.0" layoutY="42.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/mancala-logo.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="62.0" fitWidth="234.0" layoutX="9.0" layoutY="11.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@assets/mancala_text.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </Group>
+                <Group>
+                    <children>
+                        <VBox spacing="12.0">
+                            <children>
+                                <VBox spacing="4.0">
+                                    <children>
+                                        <Label text="USERNAME">
+                                            <font>
+                                                <Font name="Monospaced Bold" size="13.0"/>
+                                            </font>
+                                        </Label>
+
+                                        <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="277.0"
+                                                   promptText="username"/>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="4.0">
+                                    <children>
+                                        <Label text="PASSWORD">
+                                            <font>
+                                                <Font name="Monospaced Bold" size="13.0"/>
+                                            </font>
+                                        </Label>
+                                        <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="277.0"
+                                                       promptText="password"/>
+                                    </children>
+                                </VBox>
+                            </children>
                         </VBox>
-                        <VBox spacing="4.0">
-                           <children>
-                              <Label text="PASSWORD">
-                                 <font>
-                                    <Font name="Monospaced Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="277.0" promptText="password" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <Button fx:id="btnLogin" layoutX="3.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="272.0" text="LOGIN">
-                     <font>
-                        <Font name="Monospaced Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Text fx:id="txErrorMsg" layoutX="1.0" layoutY="121.431640625" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="273.0" />
-                  <Text fx:id="btnRegister" layoutX="117.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTER">
-                     <font>
-                        <Font name="Monospaced Regular" size="11.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
-         </children>
-      </VBox>
-   </children>
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
+                        <Button fx:id="btnLogin" layoutX="3.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0"
+                                prefWidth="272.0" text="LOGIN">
+                            <font>
+                                <Font name="Monospaced Bold" size="16.0"/>
+                            </font>
+                        </Button>
+                        <Text fx:id="txErrorMsg" layoutX="1.0" layoutY="121.431640625" strokeType="OUTSIDE"
+                              strokeWidth="0.0" wrappingWidth="273.0"/>
+                        <Text fx:id="btnRegister" layoutX="117.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="REGISTER">
+                            <font>
+                                <Font name="Monospaced Regular" size="11.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </Group>
+            </children>
+        </VBox>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
 </AnchorPane>
